@@ -18,6 +18,7 @@ Technologies utilisées pour le développement et l'utilisation de CnoT :
 * PHP 7.2.24
 * Google Chrome version 87.0.4280.66 (Build officiel) (64 bits)
 
+Note : CnoT n'est pas fait pour être responsive. Il est adapté aux écrans d'ordinateurs.
 
 Installation :
 
