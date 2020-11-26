@@ -1,0 +1,276 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+}
+
+/* Pour le popline code format */
+@font-face {
+  font-family: 'menlo';
+  src: url('../fonts/menlo.woff') format('woff');
+}
+
+#col_1{
+    height:100%;
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:380px;
+    padding:15px;
+    /*padding-right:210px;*/
+    background-color:#DBDBDB;
+    overflow:auto;
+    /*column-width: auto;*/
+    font-size: 13px;
+	border-right: solid grey 1px;
+}
+
+#col_2{
+    height:100%;
+    margin-top:0px;
+    margin-right:0px;
+    margin-left:380px;
+    padding:10px;
+    background-color:#FFFFFF;
+    overflow:auto;
+} 
+
+.contains_forms_search
+{
+    width:100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    text-align:center;
+}
+
+.form_search{
+    margin-right:20px; 
+    padding:0px;
+    display: inline-block;
+    width:20%;
+}
+
+.form_search_tags{
+    margin:0px; 
+    padding:0px;
+    display: inline-block;
+    width:20%;
+}
+
+.contains_doss_tags
+{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.contains_doss
+{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.contains_tags
+{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+
+.icon_doss, .name_doss, .name_tags, .icon_tag {
+	display: inline-block;
+}
+
+.name_doss, .name_tags {
+	margin-left: 5px;	
+}
+
+a {
+  display:inline-block; 
+  width: 100%; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  vertical-align: top;
+}
+
+
+form{
+    margin:0px; 
+    padding:0px;
+}
+
+.newbutton, .newdossierbutton, .trashnotebutton, .logoutbutton, .backbutton, .emptytrash, .deletedossierbutton, .renamedossierbutton {
+	display: inline-block;
+	width:30px;
+	cursor: pointer;
+    height:20px;
+    margin-left: 18px;
+	/*color: #0066cc;*/
+	font-size: 15px;
+}
+
+.right-inner-addon {
+  position: relative;
+}
+
+.right-inner-addon input {
+  padding-right: 30px;
+}
+
+.right-inner-addon i {
+  position: absolute;
+  right: 0px;
+  padding: 10px 12px;
+  pointer-events: none;
+}
+
+.dossierselector {
+	display: inline-block;
+	cursor: pointer;
+    /*height:20px;*/
+	margin-left: 10px;
+    margin-top: 10px;
+	margin-bottom: 15px;
+	text-align:center; 
+	/*font-size:15px*/
+}
+
+#myDossierSelect{
+  width: 290px;
+}
+
+#myDossierSelect option{
+  width: 350px
+}
+
+.containbuttons{
+	margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+
+.icon_doss, .name_doss, .name_tags, .icon_tag {
+	display: inline-block;
+}
+
+.name_doss, .name_tags {
+	margin-left: 5px;
+}
+
+.name_tags {
+	font-style: italic;
+}
+
+div[contentEditable=true]:empty:not(:focus):before{
+        content:attr(data-ph);
+        color: #bababa;
+    }
+
+.searchtrash::-webkit-input-placeholder {
+   color: white;
+}
+
+.searchtrash:-ms-input-placeholder {  
+   color: white;  
+}
+
+.search:focus{
+	border-bottom: 1px solid #32a1ce;
+}
+
+.searchtrash:focus{
+	border-bottom: 1px solid #32a1ce;
+}
+
+.notecard{
+	/*width:90%;*/
+	margin: 1%;
+	margin-bottom:20px;
+	box-shadow: 1px 1px 10px #888888;
+	background: white;
+}
+
+.innernote{
+	padding-left: 2%;
+	padding-top: 5px;
+	padding-right: 2%;
+	padding-bottom: 5px;
+}
+
+textarea{
+	padding: 0;
+	padding-top: 30px; 
+	width:100%;
+	border: 0 none white;
+    overflow: hidden;
+    outline: none;
+    resize: none;
+}
+
+textarea:focus{
+	border-bottom: 1px;
+	outline: 0;
+}
+
+.noteentry{
+	padding: 0;
+	padding-top: 5px; 
+	width:100%;
+	border: 0 none white;
+    overflow: hidden;
+    outline: none;
+    resize: none;
+}
+
+.noteentry:focus{
+	border-bottom: 1px;
+	outline: 0;
+}
+
+input{
+	width:100%;
+	border:0px;
+	text-overflow: ellipsis;
+	margin:5px;
+}
+
+input:focus{
+	border-bottom: 1px;
+	outline: 0;
+}
+
+hr{
+	margin:0;
+}
+
+.Roboto-normal-100 {
+
+}
+
+.lastupdated{
+	float:right;
+	font-size: 12px;
+	font-family: 'Roboto' !important;
+	font-style: italic;
+	font-weight: 400;
+}
+
+.{
+    float:left;
+    font-size: 15px;
+    font-family: 'Roboto' !important;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.created{
+	float:right;
+	font-size: 15px;
+	font-family: 'Roboto' !important;
+	font-style: normal;
+	font-weight: 300;
+}
