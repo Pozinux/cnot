@@ -2,6 +2,12 @@ var editing = 0;
 var lastudpdate;
 var editingnote=-1;
 
+function updateidsearch(el) 
+{
+    editingnote = el.id.substr(5);
+}
+
+
 function updateidhead(el) 
 {
     editingnote = el.id.substr(3);
@@ -14,7 +20,6 @@ function updateidtags(el)
 
 function updateident(el)
 {
-    // alert(el.id)
     editingnote = el.id.substr(5); 
 }
 
@@ -178,7 +183,7 @@ function deleteNote(iid){
 }
 
 function update(){
-    if(editingnote=='rch') return;
+    if(editingnote=='search') return;
     editing = 1;
     var curdate = new Date();
     var curtime = curdate.getTime();

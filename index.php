@@ -297,7 +297,7 @@ session_start();
 			<form class="form_search" action="index.php" method="POST">          
 				<div class="right-inner-addon">
 					<i class="fas fa-search"></i>
-					<input autocomplete="off" autocapitalize="off" spellcheck="false" type="search" id="search" name="search" class="search form-control" placeholder="Rechercher dans les notes" onfocus="updateidhead(this);"/>
+					<input autocomplete="off" autocapitalize="off" spellcheck="false" id="note-search" type="search" name="search" class="search form-control" placeholder="Rechercher dans les notes" onfocus="updateidsearch(this);"/>
 				</div>
 				<input type="hidden" name="dossier_search" value='<?php echo $dossier_search;?>'/>  <!-- Pour envoyer au serveur en post en même temps que la recherche l'info du carnet en cours -->
 			</form>
@@ -305,7 +305,7 @@ session_start();
 			<form class="form_search_tags" action="index.php" method="POST">          
 				<div class="right-inner-addon">
 					<i class="fas fa-tags"></i>
-					<input autocomplete="off" autocapitalize="off" spellcheck="false" id="search" type="search" class="form-control search" placeholder="Rechercher dans les tags" onfocus="updateidhead(this);" name="tags_search"/>
+					<input autocomplete="off" autocapitalize="off" spellcheck="false" id="tags-search" type="search" class="form-control search" placeholder="Rechercher dans les tags" onfocus="updateidsearch(this);" name="tags_search"/>
 				</div>  
 					<input type="hidden" name="dossier_search" value='<?php echo $dossier_search;?>'/>  <!-- Pour envoyer au serveur en post en même temps que la recherche l'info du carnet en cours -->
 			</form>                 
