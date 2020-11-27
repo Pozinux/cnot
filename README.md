@@ -10,6 +10,8 @@ Voici un example de mon propre CnoT :
 
 ![](image.png)
 
+Possibilités de mettre en forme le texte :
+
 ![](image2.png)
 
 Technologies utilisées pour le développement et l'utilisation de CnoT :
