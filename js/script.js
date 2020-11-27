@@ -7,7 +7,6 @@ function updateidsearch(el)
     editingnote = el.id.substr(5);
 }
 
-
 function updateidhead(el) 
 {
     editingnote = el.id.substr(3);
@@ -93,14 +92,14 @@ function renamedossier(dossier_actuel, new_dossier_name){
     {
         if (new_dossier_name)
         {
-            if (/\s/.test(new_dossier_name)) {
-                confirm("Problème avec le nom du nouveau dossier fourni. Nom du nouveau dossier fourni contient un espace. Aucune modification effectuée.");
-            }
-            else
-            {
+            //if (/\s/.test(new_dossier_name)) {
+            //    confirm("Problème avec le nom du nouveau dossier fourni. Nom du nouveau dossier fourni contient un espace. Aucune modification effectuée.");
+            //}
+            //else
+            //{
                $.post( "renamedossier.php", {actuel_dossier: dossier_actuel, dossier_new_name: new_dossier_name, pass: app_pass})
                setTimeout(function(){ window.location.href = "index.php?doss="+new_dossier_name; }, 1000);
-            }                
+            //}                
         }
         else
         {
