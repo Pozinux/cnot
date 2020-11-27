@@ -20,7 +20,7 @@ Possibilités de mettre en forme lorsque l'on sélectionne du texte :
 
 Liste des technologies utilisées pour le développement et l'utilisation de CnoT (en gros l'environnement pour lequel CnoT fonctionne) :
 
-* Linux (pour moi c'est un petit VPS Kimsufi OVH) avec un compte super-utilisateur
+* Serveur Linux avec un compte super-utilisateur (pour moi c'est un petit VPS Kimsufi OVH) 
 * CentOS Linux release 8.2.2004
 * mysql 8.0.21
 * Apache 2.4.37
