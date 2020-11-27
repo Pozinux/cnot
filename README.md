@@ -4,7 +4,7 @@ CnoT est une alternative open source à des applications comme Evernote. CnoT ne
 
 CnoT est basée sur php, mysql et javascript.
 
-La démonstration publique se trouve au lien suivant. Utilisez <b>"password"</b> comme mot de passe. :
+La démonstration publique se trouve au lien suivant. Utilisez <b>"password"</b> comme mot de passe :
 
 [Lien vers la démonstration publique](https://cnot.fr). 
 
