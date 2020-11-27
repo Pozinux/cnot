@@ -40,7 +40,9 @@ Liste des technologies utilisées pour le développement et l'utilisation de Cno
 
 ## Futurs développements
 
-Il manque encore des fonctionnalités. Je suis preneur de toutes aides en développement PHP et Javascript (ce ne sont pas mes compétences premières). To do list :
+Il manque encore des fonctionnalités et il y a probablement des améliorations du code à faire. Je suis preneur de toutes aides en développement PHP et Javascript (ce ne sont pas mes compétences premières). 
+
+To do list :
 
 * Ajout d'une pièce jointe à une note
 * Pouvoir créer un lien dans une note ou vers internet
