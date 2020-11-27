@@ -6,7 +6,7 @@ CnoT est basée sur php, mysql et javascript.
 
 La démonstration publique se trouve au lien suivant. Utilisez <b>"password"</b> comme mot de passe :
 
-[Lien vers la démonstration publique](https://cnot.fr). 
+[Lien vers la démonstration publique](https://cnot.fr)
 
 ### Voici un example de mon propre CnoT :
 
