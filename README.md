@@ -30,13 +30,14 @@ Liste des technologies utilisées pour le développement et l'utilisation de Cno
 
 ## Installation
 
-1. Téléchargez les sources de CnoT de ce repository Github sur votre serveur compatible php-mysql.
-2. Cette application écrit les notes dans des fichiers, assurez-vous de fournir les autorisations nécessaires pour qu'Apache puisse lire et écrire dans le dossier nommé "entries".
-3. Créez votre base de donnée mysql.
-4. Créez un utilisateur mysql qui aura les droits d'utiliser cette base.
-5. Editez le fichier credentials.php pour définir vos identifiants et les informations de votre base de données.
-6. Au lancement, l'application devrait créer elle-même la structure nécessaire dans la base de donnée.
-7. Connectez-vous à l'adresse web de l'application et entrez votre mot de passe.
+* Téléchargez les sources de CnoT de ce repository Github sur votre serveur compatible php-mysql (ça peut être un VPS, hébergement mutualisé ou un Wamp local par exemple).
+* Créez une base de donnée mysql.
+* Créez un utilisateur mysql qui aura les droits d'utiliser cette base.
+* Editez le fichier credentials.php pour définir vos identifiants et les informations de votre base de données.
+* Au lancement, l'application devrait créer elle-même la structure nécessaire dans la base de donnée.
+* Connectez-vous à l'adresse web de l'application et entrez votre mot de passe.
+
+<b>Note</b>Cette application écrit les notes dans des fichiers, assurez-vous de fournir les autorisations nécessaires pour qu'Apache puisse lire et écrire dans le dossier nommé "entries".
 
 ## Futurs développements
 
