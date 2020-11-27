@@ -37,7 +37,7 @@ Liste des technologies utilisées pour le développement et l'utilisation de Cno
 * Au lancement, l'application devrait créer elle-même la structure nécessaire dans la base de donnée.
 * Connectez-vous à l'adresse web de l'application et entrez votre mot de passe.
 
-<b>Note</b>Cette application écrit les notes dans des fichiers, assurez-vous de fournir les autorisations nécessaires pour qu'Apache puisse lire et écrire dans le dossier nommé "entries".
+<b>Note</b> : Cette application écrit les notes dans des fichiers, assurez-vous de fournir les autorisations nécessaires pour qu'Apache puisse lire et écrire dans le dossier nommé "entries".
 
 ## Futurs développements
 
