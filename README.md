@@ -35,7 +35,7 @@ Installation :
 7. Connectez-vous à l'adresse web de l'application et entrez votre mot de passe.
 
 
-<u>Futurs développements :</u>
+<b>Futurs développements :</b>
 
 Il manque encore des fonctionnalités. Je suis preneur de toutes aides en développement PHP et Javascript (ce ne sont pas mes compétences premières). To do list :
 
