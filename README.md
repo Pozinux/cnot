@@ -16,17 +16,19 @@ Possibilités de mettre en forme lorsque l'on sélectionne du texte :
 
 ![](image2.png)
 
-## Technologies utilisées pour le développement et l'utilisation de CnoT :
+## Technologies utilisées
 
-* CentOS Linux release 8.2.2004 (Core)
-* mysql  Ver 8.0.21 for Linux on x86_64 (Source distribution)
-* Server version: Apache/2.4.37 (centos)
+Liste des technologies utilisées pour le développement et l'utilisation de CnoT :
+
+* CentOS Linux release 8.2.2004
+* mysql Ver 8.0.21
+* Server version: Apache/2.4.37
 * PHP 7.2.24
-* Google Chrome version 87.0.4280.66 (Build officiel) (64 bits)
+* Google Chrome version 87.0.4280.66
 
 <b>Note</b> : CnoT n'est pas fait pour être responsive. Il est adapté aux écrans d'ordinateurs.
 
-## Installation :
+## Installation
 
 1. Téléchargez les sources de CnoT de ce repository Github sur votre serveur compatible php-mysql.
 2. Cette application écrit les notes dans des fichiers, assurez-vous de fournir les autorisations nécessaires pour qu'Apache puisse lire et écrire dans le dossier nommé "entries".
@@ -36,7 +38,7 @@ Possibilités de mettre en forme lorsque l'on sélectionne du texte :
 6. Au lancement, l'application devrait créer elle-même la structure nécessaire dans la base de donnée.
 7. Connectez-vous à l'adresse web de l'application et entrez votre mot de passe.
 
-## Futurs développements :
+## Futurs développements
 
 Il manque encore des fonctionnalités. Je suis preneur de toutes aides en développement PHP et Javascript (ce ne sont pas mes compétences premières). To do list :
 
