@@ -4,7 +4,9 @@ CnoT est une alternative open source à des applications comme Evernote. CnoT ne
 
 CnoT est basée sur php, mysql et javascript.
 
-La démonstration publique se trouve [ICI](https://cnot.fr). Utilisez "password" comme mot de passe.
+La démonstration publique se trouve [Lien vers la démonstration publique](https://cnot.fr). 
+
+Utilisez <b>"password"</b> comme mot de passe.
 
 Voici un example de mon propre CnoT :
 
@@ -14,7 +16,8 @@ Possibilités de mettre en forme le texte :
 
 ![](image2.png)
 
-Technologies utilisées pour le développement et l'utilisation de CnoT :
+
+# Technologies utilisées pour le développement et l'utilisation de CnoT :
 
 * CentOS Linux release 8.2.2004 (Core)
 * mysql  Ver 8.0.21 for Linux on x86_64 (Source distribution)
@@ -24,7 +27,8 @@ Technologies utilisées pour le développement et l'utilisation de CnoT :
 
 Note : CnoT n'est pas fait pour être responsive. Il est adapté aux écrans d'ordinateurs.
 
-Installation :
+
+# Installation :
 
 1. Téléchargez les sources de CnoT sur ce repository Github sur votre serveur compatible php-mysql.
 2. Cette application écrit les notes dans des fichiers, assurez-vous de fournir les autorisations nécessaires pour qu'Apache puisse lire et écrire dans le dossier nommé entries.
@@ -35,7 +39,7 @@ Installation :
 7. Connectez-vous à l'adresse web de l'application et entrez votre mot de passe.
 
 
-<b>Futurs développements :</b>
+# Futurs développements :
 
 Il manque encore des fonctionnalités. Je suis preneur de toutes aides en développement PHP et Javascript (ce ne sont pas mes compétences premières). To do list :
 
