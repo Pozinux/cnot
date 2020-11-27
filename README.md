@@ -10,6 +10,10 @@ Voici un example de mon propre CnoT :
 
 ![](image.png)
 
+Possibilités de mettre en forme le texte :
+
+![](image2.png)
+
 Technologies utilisées pour le développement et l'utilisation de CnoT :
 
 * CentOS Linux release 8.2.2004 (Core)
@@ -18,6 +22,7 @@ Technologies utilisées pour le développement et l'utilisation de CnoT :
 * PHP 7.2.24
 * Google Chrome version 87.0.4280.66 (Build officiel) (64 bits)
 
+Note : CnoT n'est pas fait pour être responsive. Il est adapté aux écrans d'ordinateurs.
 
 Installation :
 
