@@ -26,19 +26,25 @@ Note : CnoT n'est pas fait pour être responsive. Il est adapté aux écrans d'o
 
 Installation :
 
-1. Téléchargez le dossier cnot contenant les fichiers sources sur votre serveur compatible php-mysql.
-2. Editez le fichier credentials.php pour définir vos identifiants et les informations de votre base de données.
-3. Au lancement, l'application créera elle-même la structure nécessaire dans la base de donnée.
-4. Connectez-vous à l'adresse web de l'application.
+1. Téléchargez les sources de CnoT sur ce repository Github sur votre serveur compatible php-mysql.
+2. Cette application écrit les notes dans des fichiers, assurez-vous de fournir les autorisations nécessaires pour qu'Apache puisse lire et écrire dans le dossier nommé entries.
+3. Créez votre base de donnée mysql.
+4. Créez un utilisateur mysql qui aura les droits d'utiliser cette base.
+5. Editez le fichier credentials.php pour définir vos identifiants et les informations de votre base de données.
+6. Au lancement, l'application devrait créer elle-même la structure nécessaire dans la base de donnée.
+7. Connectez-vous à l'adresse web de l'application et entrez votre mot de passe.
 
+Futurs développements :
 
-Autorisations :
+Il manque encore des fonctionnalités. Je suis preneur de toutes aides en développement PHP et Javascript (ce ne sont pas mes compétences premières). To do list :
 
-Cette application écrit les notes dans des fichiers, assurez-vous de fournir les autorisations nécessaires pour qu'Apache puisse lire et écrire dans le dossier entries.
+* Ajout d'une pièce jointe à une note
+* Pouvoir créer un lien dans une note ou vers internet
+* Avoir l'auto-complétion des tags lorsque l'on veut en ajouter un
+* Pouvoir exporter toutes les notes depuis l'interface (car sinon il suffit de récupérer le répertoire "entries")
+* Pouvoir partager une note
+* ...
 
-
-Fork depuis :
+Pour info j'ai forké depuis le github suivant mais ce projet n'est plus mis à jour depuis 6 ans et la démo publique n'est plus accessible.
 
 https://github.com/arkanath/SleekArchive 
-mais ce github n'est plus mis à jour depuis 6 ans et la démo publique n'est plus accessible.
-
