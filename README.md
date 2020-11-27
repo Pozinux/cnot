@@ -29,7 +29,7 @@ La démonstration publique se trouve au lien suivant. Utilisez <b>"password"</b>
 ## Installation :
 
 1. Téléchargez les sources de CnoT de ce repository Github sur votre serveur compatible php-mysql.
-2. Cette application écrit les notes dans des fichiers, assurez-vous de fournir les autorisations nécessaires pour qu'Apache puisse lire et écrire dans le dossier nommé entries.
+2. Cette application écrit les notes dans des fichiers, assurez-vous de fournir les autorisations nécessaires pour qu'Apache puisse lire et écrire dans le dossier nommé "entries".
 3. Créez votre base de donnée mysql.
 4. Créez un utilisateur mysql qui aura les droits d'utiliser cette base.
 5. Editez le fichier credentials.php pour définir vos identifiants et les informations de votre base de données.
