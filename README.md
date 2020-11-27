@@ -10,6 +10,8 @@ Voici un example de mon propre CnoT :
 
 ![](image.png)
 
+![](image2.png)
+
 Technologies utilisées pour le développement et l'utilisation de CnoT :
 
 * CentOS Linux release 8.2.2004 (Core)
