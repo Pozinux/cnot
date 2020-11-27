@@ -12,7 +12,7 @@ La démonstration publique se trouve au lien suivant. Utilisez <b>"password"</b>
 
 ![](image.png)
 
-#### Possibilités de mettre en forme lorsque l'on sélectionne du texte :
+Possibilités de mettre en forme lorsque l'on sélectionne du texte :
 
 ![](image2.png)
 
