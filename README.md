@@ -34,7 +34,8 @@ Installation :
 6. Au lancement, l'application devrait créer elle-même la structure nécessaire dans la base de donnée.
 7. Connectez-vous à l'adresse web de l'application et entrez votre mot de passe.
 
-Futurs développements :
+
+<u>Futurs développements :</u>
 
 Il manque encore des fonctionnalités. Je suis preneur de toutes aides en développement PHP et Javascript (ce ne sont pas mes compétences premières). To do list :
 
