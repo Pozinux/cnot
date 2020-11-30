@@ -116,7 +116,7 @@ function renamedossier(dossier_actuel, new_dossier_name){
 function removedossier(dossier_to_remove){
     if (dossier_to_remove) 
     {
-        var r = confirm("Êtes-vous sûr de vouloir supprimer définitivement le dossier \""+dossier_to_remove+"\" et toutes ses notes (également celles de ce dossier qui sont dans la corbeille ? Elles seront perdues à jamais !");
+        var r = confirm("Êtes-vous sûr de vouloir supprimer définitivement le dossier \""+dossier_to_remove+"\" et toutes ses notes (également celles de ce dossier qui sont dans la corbeille ?) Elles seront perdues à jamais !");
         if (r == true) {
             $.post( "removedossier.php", {del_dossier: dossier_to_remove, pass: app_pass})
             setTimeout(function(){ window.location.href = "index.php?doss=tous"; }, 1000);
