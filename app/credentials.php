@@ -4,5 +4,5 @@
         define("DATABASEDB", "cnot"); // The database name
         define("PASSWORDDB", "XXXXXXXX"); // The database password. 
         define("JOURNAL_NAME", "CnoT"); // The Journal name.
-        define("APPPASSWORD", "YYYYYY"); // The Journal password. 
+        define("APPPASSWORD", "remote"); // The Journal password. 
 ?>
