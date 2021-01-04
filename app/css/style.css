@@ -31,8 +31,23 @@ body {
     margin-left:380px;
     padding:10px;
     background-color:#FFFFFF;
-    overflow:auto;
+    overflow:scroll;
 } 
+
+.icon_corbeille{
+    margin-left: 10px;	
+    margin-top: 7px;	
+}
+
+.icon_corbeille_trash{
+    margin-left: 5px;	
+    margin-top: 7px;	
+}
+
+.icon_restore_trash{
+    margin-left: 20px;	
+    margin-top: 7px;	
+}
 
 .contains_forms_search
 {
@@ -87,7 +102,7 @@ body {
 	margin-left: 5px;	
 }
 
-a {
+.links_arbo_gauche {
   display:inline-block; 
   width: 100%; 
   white-space: nowrap; 
@@ -165,7 +180,7 @@ form{
 	font-style: italic;
 }
 
-div[contentEditable=true]:empty:not(:focus):before{
+div[contentEditable=true]:empty:before{
         content:attr(data-ph);
         color: #bababa;
     }
@@ -191,6 +206,7 @@ div[contentEditable=true]:empty:not(:focus):before{
 	margin: 1%;
 	margin-bottom:20px;
 	box-shadow: 1px 1px 10px #888888;
+    /*border: 1px solid #ccc;*/
 	background: white;
 }
 
@@ -221,7 +237,9 @@ textarea:focus{
 	padding-top: 5px; 
 	width:100%;
 	border: 0 none white;
-    overflow: hidden;
+    /*overflow: auto;*/
+	/*word-break: break-all;*/
+    overflow-wrap: break-word;
     outline: none;
     resize: none;
 }
@@ -257,11 +275,12 @@ hr{
 	font-family: 'Roboto' !important;
 	font-style: italic;
 	font-weight: 400;
+    margin-top: 7px;	
 }
 
 .{
     float:left;
-    font-size: 15px;
+    font-size: 13px;
     font-family: 'Roboto' !important;
     font-style: italic;
     font-weight: 400;

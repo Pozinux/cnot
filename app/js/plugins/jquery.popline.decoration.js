@@ -59,16 +59,16 @@
       }
     },
 
-   menlo: {
+/*    menlo: {
       iconClass: "fas fa-code",
       mode: "edit",
       action: function(event) {
         document.execCommand('fontName', false, "menlo"); // Le fichier se trouve dans le dossier fonts + ajout d'un css @font-face dans style.css
-        document.execCommand('fontSize', false, "2");
 		document.execCommand('ForeColor', false, "#323095");
+	        //document.execCommand('fontSize', false, "2");
 		//document.execCommand('BackColor',false, "#fbfaf8");
       }
-    },
+    }, */
 
     roboto: {
       iconClass: "fas fa-font",

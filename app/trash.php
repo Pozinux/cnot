@@ -67,14 +67,13 @@ session_start();
 			fclose($handle);
 			echo '<div id="note'.$row['id'].'" class="notecard">
             <div class="innernote">
+                <span title="Supprimer définitivement" onclick="deletePermanent(\''.$row['id'].'\')" class="fas fa-trash pull-right icon_corbeille_trash" style="cursor: pointer;"></span>
+                <span title="Restaurer cette note" onclick="putBack(\''.$row['id'].'\')" class="fa fa-trash-restore-alt pull-right icon_restore_trash" style="margin-right:20px; cursor: pointer;"></span>
                 <div id="lastupdated'.$row['id'].'" class="lastupdated">Dernière modification le '.formatDateTime(strtotime($row['updated'])).'</div>
                 <h4><input id="doss'.$row['id'].'" type="text" placeholder="dossier ?" value="'.$row['dossier'].'"></input> </h4>
                 <h3><input id="inp'.$row['id'].'" type="text" placeholder="Titre ?" value="'.$row['heading'].'"></input> </h3>
                 <hr>
                 <div class="noteentry" onload="initials(this);" id="entry'.$row['id'].'" data-ph="Entrer un texte ou une image ici" contenteditable="true">'.$entryfinal.'</div>
-                <span title="Supprimer définitivement" onclick="deletePermanent(\''.$row['id'].'\')" class="fas fa-trash pull-right" style="cursor: pointer;"></span>
-                <span title="Restaurer cette note" onclick="putBack(\''.$row['id'].'\')" class="fa fa-trash-restore-alt pull-right" style="margin-right:20px; cursor: pointer;"></span>
-
                 <div style="height:30px;"></div>
             </div>
             </div>';

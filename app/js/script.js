@@ -20,6 +20,9 @@ function updateidtags(el)
 function updateident(el)
 {
     editingnote = el.id.substr(5); 
+/*     var str = document.getElementById("entry"+editingnote).innerHTML;    // Me pose pbm pour la creation d'un link. ça le créé en début de note.
+    var res = str.replace(/<br\s*[\/]?>/gi, "&nbsp;<br>");
+    document.getElementById("entry"+editingnote).innerHTML = res; */
 }
 
 function updateiddoss(el)
@@ -35,10 +38,11 @@ window.onbeforeunload = function(){
 
 function updatenote(){
     var headi = document.getElementById("inp"+editingnote).value;
-    var ent = $("#entry"+editingnote).html();
+    var ent = $("#entry"+editingnote).html();    
+    var ent = ent.replace(/<br\s*[\/]?>/gi, "&nbsp;<br>");  // Remplacer les lignes vides par &nbsp; pour que si on format en code le saut de ligne est gardé    
     var entcontent = $("#entry"+editingnote).text();
     var doss = document.getElementById("doss"+editingnote).value;	
-    var tags = document.getElementById("tags"+editingnote).value;	
+    var tags = document.getElementById("tags"+editingnote).value;
 
     $.post( "updatenote.php", {pass: app_pass, id: editingnote, dossier: doss, tags: tags, heading: headi, entry: ent, entrycontent: entcontent, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
     .done(function(data) {
@@ -78,8 +82,15 @@ function newnote(dossier_selected){
 function createnewdossier(new_dossier_to_create){
     if (new_dossier_to_create) 
     {
-        $.post( "createdossier.php", {new_dossier: new_dossier_to_create, pass: app_pass})
-        setTimeout(function(){ window.location.href = "index.php?doss="+new_dossier_to_create; }, 1000);
+        if (/^[A-Za-z0-9À-ü \-_]+$/i.test(new_dossier_to_create)) 
+        {
+            $.post( "createdossier.php", {new_dossier: new_dossier_to_create, pass: app_pass})
+            setTimeout(function(){ window.location.href = "index.php?doss="+new_dossier_to_create; }, 1000);
+        }
+        else
+        {
+            confirm("Le nom du dossier ne peut contenir que des espaces, des lettres, des chiffres, des tirets ou des underscores. Aucune modification effectuée.");
+        } 
     }
     else
     {
@@ -92,23 +103,23 @@ function renamedossier(dossier_actuel, new_dossier_name){
     {
         if (new_dossier_name)
         {
-            //if (/\s/.test(new_dossier_name)) {
-            //    confirm("Problème avec le nom du nouveau dossier fourni. Nom du nouveau dossier fourni contient un espace. Aucune modification effectuée.");
-            //}
-            //else
-            //{
+            if (/^[A-Za-z0-9À-ü \-_]+$/i.test(new_dossier_name)) {
                $.post( "renamedossier.php", {actuel_dossier: dossier_actuel, dossier_new_name: new_dossier_name, pass: app_pass})
                setTimeout(function(){ window.location.href = "index.php?doss="+new_dossier_name; }, 1000);
-            //}                
+            }
+            else
+            {
+               confirm("Le nom du dossier ne peut contenir que des espaces, lettres, des chiffres, des tirets ou des underscores. Aucune modification effectuée.");
+            }                
         }
         else
         {
-            alert("Problème avec le nom des dossiers fournis. Vide ou égal à 0 ? Aucune modification effectuée.");
+            alert("Problème avec le nom du dossier fourni. Vide ou égal à 0 ? Aucune modification effectuée.");
         } 
     }
     else
     {
-       confirm("Problème avec le nom des dossiers fournis. Vide ou égal à 0 ? Aucune modification effectuée.");
+       confirm("Problème avec le nom du dossier fourni. Vide ou égal à 0 ? Aucune modification effectuée.");
     } 
    
 }

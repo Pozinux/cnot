@@ -10,12 +10,20 @@ a:visited { color: #2E8CFA; }
 a:hover { color: #2E8CFA; }
 a:active { color: #2E8CFA; }
 
-blockquote {
-  border-left: 4px solid #2E8CFA;
-  margin-left: 0px;
-  padding-left: 15px;
-  margin-right: 0px;
+blockquote {/*Le blockquote ici overight celui du bootstrap.css */
+    /*background: #eee;*/
+    background: #fbfaf8;
+    border-radius: 5px;
+    margin: 0px;
+    font-size: 11px;
+    padding: 10px;
+    border: 1px solid #ddd;
 }
+
+img {
+    max-width:100%; /* Pour que les captures d'ecrans ne dépassent pas quand elles sont trop grandes */
+}
+
 
 .switcher {
   width: 150px;

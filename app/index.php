@@ -57,12 +57,12 @@ session_start();
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
 	<title><?php echo JOURNAL_NAME;?></title>
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
-	<link type="text/css" rel="stylesheet" href="css/animate.css"/>
+	<!--<link type="text/css" rel="stylesheet" href="css/animate.css"/>-->
 	<link href='https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link type="text/css" rel="stylesheet" href="css/style.css"/> 
 	<script src="js/jquery.min.js"></script> 
     <link rel="stylesheet" href="css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="css/toggle-switch.css" />
+	<!--<link rel="stylesheet" type="text/css" href="css/toggle-switch.css" />-->
 	<link rel="stylesheet" type="text/css" href="css/page.css" />
     
     <!-- Bibliothèque jquery popline pour la barre qui apparait lorsque l'on sélectionne du texte dans une note / voir dans "js/plugins" -->
@@ -70,9 +70,9 @@ session_start();
     <!-- Retirer les lignes pour les fonctions que l'on ne veut pas utiliser voir apparaitre dans la barre -->
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.popline.js"></script>
-	<!--<script type="text/javascript" src="js/plugins/jquery.popline.link.js"></script>-->
-	<!-- <script type="text/javascript" src="js/plugins/jquery.popline.blockquote.js"></script> -->
+	<script type="text/javascript" src="js/plugins/jquery.popline.link.js"></script>
 	<script type="text/javascript" src="js/plugins/jquery.popline.decoration.js"></script>
+	<script type="text/javascript" src="js/plugins/jquery.popline.blockquote.js"></script>
 	<script type="text/javascript" src="js/plugins/jquery.popline.list.js"></script>
 	<!--<script type="text/javascript" src="js/plugins/jquery.popline.justify.js"></script> -->
 	<!--<script type="text/javascript" src="js/plugins/jquery.popline.blockformat.js"></script> -->
@@ -84,6 +84,9 @@ session_start();
 	<script>
 		var app_pass = '<?php echo APPPASSWORD;?>';
 	</script>
+    
+
+    
 </head>
 <body>
 	<!-- COLONNE 1 -->	
@@ -218,7 +221,7 @@ session_start();
   
         if($note!='') // Si note n'est pas vide c'est que l'on vient de cliquer sur une note dans la liste de l'arborescence donc on ne veut afficher (GAUCHE) que les notes de son carnet (DROITE) que la note sur laquelle on a cliqué
         {
-            $query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by dossier ASC'; // Classé par carnet par ordre alphabétique
+            $query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; // Classé par carnet par ordre alphabétique
             $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($note,ENT_QUOTES).'%\')';
 
         }
@@ -228,12 +231,12 @@ session_start();
 			
 				if($tags_search!='') // c'est une recherche dans les tags donc on ne veut afficher que les notes qui contiennent le tag
 				{
-					$query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by dossier ASC'; // Classé par carnet par ordre alphabétique
+					$query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
 					$query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
 				}
 				else // sinon c'est un recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché // C'est aussi l'affichage de toutes les notes (recherche "")
 				{
-					$query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by dossier ASC'; // Classé par carnet par ordre alphabétique
+					$query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
                     $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
 				}
 			}
@@ -241,12 +244,12 @@ session_start();
 			{
 				if($tags_search!='') // c'est une recherche dans les tags donc on ne veut afficher que les notes qui contiennent le tag
 				{
-					$query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by dossier ASC'; // Classé par carnet par ordre alphabétique
+					$query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
 					$query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
 				}
 				else // sinon c'est un recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché // C'est aussi l'affichage de toutes les notes (recherche "")
 				{
-					$query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by dossier ASC'; // Classé par carnet par ordre alphabétique
+					$query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
 				    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
 				}
 			} 
@@ -270,14 +273,14 @@ session_start();
 		foreach ($table as $key => $value) 
 		{            
             echo "<form action=index.php><input type=hidden name=note>                        
-                        <a href='index.php?doss=".$key."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='far fa-folder'></div>".$key."</a>
+                        <a class=links_arbo_gauche href='index.php?doss=".$key."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='far fa-folder'></div>".$key."</a>
                      </form>";
            
 			echo "<div style='height: 2px'></div>"; // Ajuster la distance entre le dossier et sa première note
 			foreach ($value as $v2) 
 			{           			
 				echo "<form action=index.php><input type=hidden name=note>                        
-                        <a href='index.php?doss=".$key."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 15px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
+                        <a class=links_arbo_gauche href='index.php?doss=".$key."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 15px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
                      </form>";
 
                 echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les notes
@@ -346,10 +349,13 @@ session_start();
                 $contents = fread($handle, filesize($filename));
                 $entryfinal = $contents;
                 fclose($handle);
-                
+           
                 // Afficher les notes
                 echo '<div id="note'.$row['id'].'" class="notecard">
                     <div class="innernote">
+                    
+                        <span style="cursor:pointer" title="Supprimer cette note" onclick="deleteNote(\''.$row['id'].'\')" class="fas fa-trash pull-right icon_corbeille"></span>
+             
                     
                         <div id="lastupdated'.$row['id'].'" class="lastupdated">Dernière modification le '.formatDateTime(strtotime($row['updated'])).'</div>
                         
@@ -359,27 +365,27 @@ session_start();
 							<div class="name_doss"><span><input size="40px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateiddoss(this);" id="doss'.$row['id'].'" type="text" placeholder="Dossier ?" value="'.$row['dossier'].'"></input></span></div>
 							
 							<div class="icon_tag"><span style="text-align:center; font-size:12px;" class="fa fa-tag"></div>
-							<div class="name_tags"><span><input size="50px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateidtags(this);" id="tags'.$row['id'].'" type="text" placeholder="Tags ?" value="'.$row['tags'].'"></input></span></div>
+							<div class="name_tags"><span><input size="50px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tags" onfocus="updateidtags(this);" id="tags'.$row['id'].'" type="text" placeholder="Tags ?" value="'.$row['tags'].'"></input></span></div>
                         </div>
                         
+                        <hr>                        
                         <hr>
                         
                         <h4><input style="color:#0066cc" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateidhead(this);" id="inp'.$row['id'].'" type="text" placeholder="Titre ?" value="'.$row['heading'].'"></input></h4>
                         
                         <div class="noteentry" autocomplete="off" autocapitalize="off" spellcheck="false" onload="initials(this);" onfocus="updateident(this);" id="entry'.$row['id'].'" data-ph="Entrer du texte ou coller une image" contenteditable="true">'.$entryfinal.'</div>
                         
-                        <span style="cursor:pointer" title="Supprimer cette note" onclick="deleteNote(\''.$row['id'].'\')" class="fas fa-trash pull-right"></span>
                         <div style="height:30px;"></div>
                     </div>
                 </div>';
             }
-        ?>
-        
+        ?>        
     </div>
 </body>
 	
 
 <script src="js/script.js"></script>
 <script> $(".noteentry").popline(); </script>  <!-- Lorsque l'on sélectionne un texte, cela fait apparaitre le menu d'édition en floatant dans la zone .noteentry (donc contenu des notes) au-dessus / Il faut que ce soit un 'contenteditable="true"' -->
+
 
 </html>
