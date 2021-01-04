@@ -49,6 +49,7 @@
 	}	
     
 #	$query="UPDATE entries SET heading = '".htmlspecialchars($heading,ENT_QUOTES)."', entry = '".htmlspecialchars($entrycontent,ENT_QUOTES)."', created = created, updated = '".date("Y-m-d H:i:s", $seconds)."', dossier = '".htmlspecialchars($dossier,ENT_QUOTES)."', tags = '".htmlspecialchars($tags,ENT_QUOTES)."' WHERE id=".$id;
+
 	$query="UPDATE entries SET heading = '".$heading."', entry = '".htmlspecialchars($entrycontent,ENT_QUOTES)."', created = created, updated = '".date("Y-m-d H:i:s", $seconds)."', dossier = '".htmlspecialchars($dossier,ENT_QUOTES)."', tags = '".htmlspecialchars($tags,ENT_QUOTES)."' WHERE id=".$id;
 	if($con->query($query)) echo die('Dernière modification le '.formatDateTime(strtotime(date("Y-m-d H:i:s", $seconds))));
 	else echo mysqli_error($con);
