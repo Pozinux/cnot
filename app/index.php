@@ -221,6 +221,9 @@ session_start();
   
         if($note!='') // Si note n'est pas vide c'est que l'on vient de cliquer sur une note dans la liste de l'arborescence donc on ne veut afficher (GAUCHE) que les notes de son carnet (DROITE) que la note sur laquelle on a cliqué
         {
+	    $note = str_replace("&#039;", "'", $note); // car les ' sont enregistrés en base comme des "&#039;"	
+	    $note = str_replace("&quot;", "\"", $note); // car les ' sont enregistrés en base comme des "&#039;"	
+	    #echo $note;
             $query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; // Classé par carnet par ordre alphabétique
             $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($note,ENT_QUOTES).'%\')';
 
