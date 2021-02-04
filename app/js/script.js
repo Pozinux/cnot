@@ -30,6 +30,11 @@ function updateiddoss(el)
     editingnote = el.id.substr(4); 
 }
 
+function updateidsousdoss(el)
+{
+    editingnote = el.id.substr(8); 
+}
+
 window.onbeforeunload = function(){
     if(editing!=0){
         return 'We are still attempting to save something...';
@@ -41,10 +46,11 @@ function updatenote(){
     var ent = $("#entry"+editingnote).html();    
     var ent = ent.replace(/<br\s*[\/]?>/gi, "&nbsp;<br>");  // Remplacer les lignes vides par &nbsp; pour que si on format en code le saut de ligne est gardé    
     var entcontent = $("#entry"+editingnote).text();
-    var doss = document.getElementById("doss"+editingnote).value;	
+    var doss = document.getElementById("doss"+editingnote).value;
+    var sousdoss = document.getElementById("sousdoss"+editingnote).value;	
     var tags = document.getElementById("tags"+editingnote).value;
 
-    $.post( "updatenote.php", {pass: app_pass, id: editingnote, dossier: doss, tags: tags, heading: headi, entry: ent, entrycontent: entcontent, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
+    $.post( "updatenote.php", {pass: app_pass, id: editingnote, dossier: doss, sousdossier: sousdoss, tags: tags, heading: headi, entry: ent, entrycontent: entcontent, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
     .done(function(data) {
         if(data=='1')
         {
@@ -77,7 +83,84 @@ function newnote(dossier_selected){
     {
        alert("Merci de créer ou de sélectionner un dossier existant avant de créer une note !");
     } 
+}          
+                
+function deletedossierJS(dossier_en_cours) {
+    if (dossier_en_cours !== '') 
+    {
+        var dossier_to_remove = dossier_en_cours;
+        if (dossier_to_remove != null){
+            removedossier(dossier_to_remove);
+        }
+    }
+    else
+    {
+       confirm("Merci de sélectionner d'abord dans la liste le dossier à supprimer !");
+    } 
+}     
+                
+function renamedossierJS(dossier_en_cours) {
+    if (dossier_en_cours !== '') 
+    {
+        var dossier_a_renommer = dossier_en_cours;
+        var nouveau_nom_dossier = window.prompt("Nouveau nom pour le dossier "+dossier_a_renommer+" ?");
+        if (nouveau_nom_dossier != null){
+            renamedossier(dossier_a_renommer, nouveau_nom_dossier);
+            //window.location.href = "index.php?doss="+nouveau_nom_dossier;
+        }
+    }
+    else
+    {
+       confirm("Merci de sélectionner d'abord dans la liste le dossier à renommer !");
+    } 
 }
+
+function createNewdossierJS() {                    
+    var new_dossier_to_create = window.prompt("Nom du dossier à créer ?");
+    
+    if (new_dossier_to_create != null){
+        createnewdossier(new_dossier_to_create);
+        newnote(new_dossier_to_create);                                       
+    }           
+}                 
+
+/*function createNewdossierJS(dossier_en_cours) {                    
+    var new_dossier_to_create = window.prompt("Nom du dossier à créer ?");
+    
+    if (new_dossier_to_create != null){
+        //console.log("TPO : " + dossier_en_cours);
+        if (dossier_en_cours !== '') // si on veut créer un sous-dossier
+        {
+            createnewsubdossier(new_dossier_to_create, dossier_en_cours);
+            // sousdossierpath = dossier_en_cours + "/" + new_dossier_to_create;
+            // newnote(new_dossier_to_create);
+        }
+        else // si on veut créer un dossier à la racine
+        {
+            createnewdossier(new_dossier_to_create);
+            newnote(new_dossier_to_create);                           
+        }                        
+    }           
+}*/   
+
+/*function createnewsubdossier(new_dossier_to_create, dossier_actuel){
+    if (new_dossier_to_create) 
+    {
+        if (/^[A-Za-z0-9À-ü \-_]+$/i.test(new_dossier_to_create)) 
+        {
+            $.post( "createsousdossier.php", {new_dossier: new_dossier_to_create, dossier_parent: dossier_actuel, pass: app_pass})
+            setTimeout(function(){ window.location.href = "index.php?doss="+dossier_actuel; }, 1000);
+        }
+        else
+        {
+            confirm("Le nom du sous-dossier ne peut contenir que des espaces, des lettres, des chiffres, des tirets ou des underscores. Aucune modification effectuée.");
+        } 
+    }
+    else
+    {
+       alert("Problème avec le nom du dossier fourni. Nom du dossier fourni vide ou égal à 0. Aucune création effectuée.");
+    }
+}*/
 
 function createnewdossier(new_dossier_to_create){
     if (new_dossier_to_create) 
@@ -139,6 +222,11 @@ function removedossier(dossier_to_remove){
     }
         
 }
+
+function functionSendGetdossier() {
+    var doss = document.getElementById("mydossierSelect").value;
+    window.location.href = "index.php?doss="+doss;
+}   
 
 function emptytrash(){
     var r = confirm("Êtes-vous sûr de vouloir supprimer définitivement toutes les notes de la corbeille ? Elles seront perdues à jamais !");

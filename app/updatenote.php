@@ -14,7 +14,8 @@
 	$entrycontent = $_POST['entrycontent'];
 	$now = $_POST['now'];
 	$seconds = $now;
-	$dossier = $_POST['dossier'];	
+	$dossier = $_POST['dossier'];
+    $sousdossier = $_POST['sousdossier'];
     $tags = $_POST['tags'];	
 	
 	$query="SELECT * from entries WHERE id=".$id;
@@ -33,7 +34,7 @@
 	
 	$str = fread($handle, filesize($id.".html"));
     
-	if(htmlspecialchars($heading,ENT_QUOTES)==$row['heading'] && $entry==$str && htmlspecialchars($dossier,ENT_QUOTES)==$row['dossier'] && htmlspecialchars($tags,ENT_QUOTES)==$row['tags'])
+	if(htmlspecialchars($heading,ENT_QUOTES)==$row['heading'] && $entry==$str && htmlspecialchars($dossier,ENT_QUOTES)==$row['dossier'] && htmlspecialchars($sousdossier,ENT_QUOTES)==$row['sousdossier'] && htmlspecialchars($tags,ENT_QUOTES)==$row['tags'])
 	{
 		die('Dernière modification le '.formatDateTime(strtotime($row['updated'])));
 	}
@@ -48,8 +49,8 @@
 		unlink("entries/".$row['dossier']."/".$id.".html");		
 	}	
     
-	$query="UPDATE entries SET heading = '".htmlspecialchars($heading,ENT_QUOTES)."', entry = '".htmlspecialchars($entrycontent,ENT_QUOTES)."', created = created, updated = '".date("Y-m-d H:i:s", $seconds)."', dossier = '".htmlspecialchars($dossier,ENT_QUOTES)."', tags = '".htmlspecialchars($tags,ENT_QUOTES)."' WHERE id=".$id;
+	$query="UPDATE entries SET heading = '".htmlspecialchars($heading,ENT_QUOTES)."', entry = '".htmlspecialchars($entrycontent,ENT_QUOTES)."', created = created, updated = '".date("Y-m-d H:i:s", $seconds)."', dossier = '".htmlspecialchars($dossier,ENT_QUOTES)."', sousdossier = '".htmlspecialchars($sousdossier,ENT_QUOTES)."', tags = '".htmlspecialchars($tags,ENT_QUOTES)."' WHERE id=".$id;
 	#$query="UPDATE entries SET heading = '".$heading."', entry = '".htmlspecialchars($entrycontent,ENT_QUOTES)."', created = created, updated = '".date("Y-m-d H:i:s", $seconds)."', dossier = '".htmlspecialchars($dossier,ENT_QUOTES)."', tags = '".htmlspecialchars($tags,ENT_QUOTES)."' WHERE id=".$id;
-	if($con->query($query)) echo die('Dernière modification le '.formatDateTime(strtotime(date("Y-m-d H:i:s", $seconds))));
+	if($con->query($query)) echo die('(ID '.$id.') - Dernière modification le '.formatDateTime(strtotime(date("Y-m-d H:i:s", $seconds))));
 	else echo mysqli_error($con);
 ?>

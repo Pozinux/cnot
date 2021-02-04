@@ -14,8 +14,25 @@ body {
     position:absolute;
     top:0px;
     left:0px;
+    width:240px;
+    padding:25px;
+    /*padding-right:210px;*/
+    background-color:#DBDBDB;
+    overflow:auto;
+    /*column-width: auto;*/
+    font-size: 13px;
+	border-right: solid grey 1px;
+}
+
+#col_milieu{
+    height:100%;
+    position:absolute;
+    top:0px;
+    left:240px;
     width:380px;
-    padding:15px;
+    padding-left:15px;
+    padding-top:10px;
+    padding-right:10px;
     /*padding-right:210px;*/
     background-color:#DBDBDB;
     overflow:auto;
@@ -28,7 +45,7 @@ body {
     height:100%;
     margin-top:0px;
     margin-right:0px;
-    margin-left:380px;
+    margin-left:620px;
     padding:10px;
     background-color:#FFFFFF;
     overflow:scroll;
@@ -93,14 +110,31 @@ body {
     margin-bottom: 5px;
 }
 
+.contains_sousdoss
+{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
 
-.icon_doss, .name_doss, .name_tags, .icon_tag {
+.containbuttons{
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.name_tags {
+	font-style: italic;
+}
+
+
+.icon_doss, .name_doss, .name_tags, .icon_tag, .icon_sousdoss, .name_sousdoss {
 	display: inline-block;
 }
 
-.name_doss, .name_tags {
+.name_doss, .name_tags, .name_sousdoss {
 	margin-left: 5px;	
 }
+
 
 .links_arbo_gauche {
   display:inline-block; 
@@ -117,12 +151,12 @@ form{
     padding:0px;
 }
 
-.newbutton, .newdossierbutton, .trashnotebutton, .logoutbutton, .backbutton, .emptytrash, .deletedossierbutton, .renamedossierbutton {
+.newbutton, .newdossierbutton, .trashnotebutton, .logoutbutton, .backbutton, .emptytrash, .deletedossierbutton, .renamedossierbutton, .lister_tags {
 	display: inline-block;
 	width:30px;
 	cursor: pointer;
     height:20px;
-    margin-left: 18px;
+    margin: 5px;
 	/*color: #0066cc;*/
 	font-size: 15px;
 }
@@ -159,25 +193,6 @@ form{
 
 #myDossierSelect option{
   width: 350px
-}
-
-.containbuttons{
-	margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-}
-
-
-.icon_doss, .name_doss, .name_tags, .icon_tag {
-	display: inline-block;
-}
-
-.name_doss, .name_tags {
-	margin-left: 5px;
-}
-
-.name_tags {
-	font-style: italic;
 }
 
 div[contentEditable=true]:empty:before{
