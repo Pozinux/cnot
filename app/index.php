@@ -127,6 +127,8 @@ session_start();
                     $query_gauche = 'SELECT dossier, sousdossier FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
                     $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
                     $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'%\' AND sousdossier LIKE \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';                    
+                    //$query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \\'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND sousdossier = \\'.htmlspecialchars($sousdossier,ENT_QUOTES).'\' ORDER by updated DESC';                    
+
                 }  
             }
             else // Sinon c'est que l'on a selectionné un dossier dans la liste
@@ -294,14 +296,8 @@ session_start();
         // Arborescence COL MILIEU //            
         
         // Afficher le dossier ou sous dossier en gras en haut de la liste
-        if($sousdossier!='')
-        {
-            ?><div align = "center"><b><h4><?php echo $sousdossier;?></h4></b></div><br><?php   
-        }
-        else
-        {
-            ?><div align = "center"><b><h4><?php echo $dossier_en_cours;?></h4></b></div><br><?php 
-        }
+                
+        ?><div align = "center"><b><h4><?php echo $dossier_en_cours." / ".$sousdossier;?></h4></b></div><br><?php
 		
         $res_milieu = $con->query($query_milieu);
  		
