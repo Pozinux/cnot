@@ -197,7 +197,14 @@ session_start();
                 }
                 else
                 {
-                    $table[$row1["dossier"]][] = $row1["sousdossier"]; // Append / on ajoute au tableau global/tableau du dossier le titre du sous-dossier  
+                    if ($row1["sousdossier"] == '')  // Pour éviter dans l'arbo de gauche des sous-dossiers vides
+                    {
+                        // Ne rien faire
+                    }
+                    else
+                    {
+                        $table[$row1["dossier"]][] = $row1["sousdossier"]; // Append / on ajoute au tableau global/tableau du dossier le titre du sous-dossier
+                    }  
                 }         
             }
             
