@@ -292,9 +292,16 @@ session_start();
         
       
         // Arborescence COL MILIEU //            
-       
+        
         // Afficher le dossier ou sous dossier en gras en haut de la liste
-        ?><div align = "center"><b><h4><?php echo $dossier_en_cours."/".$sousdossier;?></h4></b></div><br><?php
+        if($sousdossier!='')
+        {
+            ?><div align = "center"><b><h4><?php echo $sousdossier;?></h4></b></div><br><?php   
+        }
+        else
+        {
+            ?><div align = "center"><b><h4><?php echo $dossier_en_cours;?></h4></b></div><br><?php 
+        }
 		
         $res_milieu = $con->query($query_milieu);
  		
@@ -330,13 +337,13 @@ session_start();
        
 		foreach ($table as $key => $value)   // $value = note / $key = dossier / 
 		{      
-            // Afficher les dossiers
+            // Afficher les dossiers (je ne l'affiche pas car c'est le dossier parent dont pour les sous-dossier ça embrouille. Au dessus j'affiche le vrai dossier donc c'est bon)
             
-            echo "<form action=index.php><input type=hidden name=note>                        
-                        <div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='far fa-folder'></div>".$key."</a>
-                     </form>";
+            // echo "<form action=index.php><input type=hidden name=note>                        
+                        // <div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='far fa-folder'></div>".$key."</a>
+                     // </form>";
            
-			echo "<div style='height: 2px'></div>"; // Ajuster la distance entre le dossier et sa première note
+			// echo "<div style='height: 2px'></div>"; // Ajuster la distance entre le dossier et sa première note
             
             // Afficher les sous-dossiers des dossiers
             
