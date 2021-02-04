@@ -214,7 +214,7 @@ session_start();
            
             echo "<div style='height: 2px'></div>"; // Ajuster la distance entre le dossier et son premier sous-dossier
             
-             // Afficher tous les dossiers
+            // Afficher tous les dossiers
             foreach ($table as $key => $value) 
             {                    
                 // Afficher les dossiers
@@ -282,7 +282,7 @@ session_start();
         }
         
       
-        // Arborescence COL MILIEU //
+        // Arborescence COL MILIEU //            
        
         // Afficher le dossier ou sous dossier en gras en haut de la liste
         ?><div align = "center"><b><h4><?php echo $dossier_en_cours."/".$sousdossier;?></h4></b></div><br><?php
