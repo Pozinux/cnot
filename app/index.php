@@ -62,7 +62,7 @@ session_start();
 	<link href='https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link type="text/css" rel="stylesheet" href="css/style.css"/> 
 	<script src="js/jquery.min.js"></script> 
-    <link rel="stylesheet" href="css/font-awesome.css" />
+        <link rel="stylesheet" href="css/font-awesome.css" />
 	<!--<link rel="stylesheet" type="text/css" href="css/toggle-switch.css" />-->
 	<link rel="stylesheet" type="text/css" href="css/page.css" />
     
@@ -79,8 +79,8 @@ session_start();
 	<!--<script type="text/javascript" src="js/plugins/jquery.popline.blockformat.js"></script> -->
 	<script type="text/javascript" src="js/plugins/jquery.popline.social.js"></script>
 	<script type="text/javascript" src="js/plugins/jquery.popline.textcolor.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery.popline.backgroundcolor.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery.popline.fontsize.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery.popline.backgroundcolor.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery.popline.fontsize.js"></script>
 
 	<script>
 		var app_pass = '<?php echo APPPASSWORD;?>';
@@ -120,14 +120,16 @@ session_start();
                 {
                     $query_gauche = 'SELECT dossier, sousdossier FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
                     $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\') ORDER by updated DESC'; 
-                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'%\' AND sousdossier LIKE \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                    //$query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'%\' AND sousdossier LIKE \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
                 }
                 else // sinon c'est une recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché // C'est aussi l'affichage de toutes les notes (recherche "")
                 {
                     $query_gauche = 'SELECT dossier, sousdossier FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
                     $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
-                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'%\' AND sousdossier LIKE \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';                    
-                    //$query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \\'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND sousdossier = \\'.htmlspecialchars($sousdossier,ENT_QUOTES).'\' ORDER by updated DESC';                    
+                    //$query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'%\' AND sousdossier LIKE \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';                    
+                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.$dossier_en_cours.'\' AND sousdossier = \''.$sousdossier.'\' ORDER by updated DESC';                    
+	            //echo $query_droite;
 
                 }  
             }
@@ -138,15 +140,15 @@ session_start();
                     if($tags_search!='') // c'est une recherche dans les tags donc on ne veut afficher que les notes qui contiennent le tag
                     {
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
-                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
-                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
                     }
                     else // sinon c'est un recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché // C'est aussi l'affichage de toutes les notes (recherche "")
                     {
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
-                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
-                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC LIMIT 50';
-
+                        //$query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC LIMIT 50';
                     }
                 }
                 else // sinon c'est que l'on recherche sur un dossier en particulier
@@ -162,6 +164,7 @@ session_start();
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
                         $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
                         $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        //echo $query_droite; 
 
                     }
                 } 
@@ -194,7 +197,7 @@ session_start();
                     $table[$row1["dossier"]] = array(); // ...on insert au nouveau tableau global un nouveau tableau vide au nom de ce dossier
                 }
                 
-                // Si le sous-dossier a déjà été rajouté au tableau
+                // Si le sous-dossier a déjà été rajouté au tableau 
                 if(multi_array_search($row1["sousdossier"], $table))
                 {
                     // Ne rien faire
@@ -210,6 +213,9 @@ session_start();
                         $table[$row1["dossier"]][] = $row1["sousdossier"]; // Append / on ajoute au tableau global/tableau du dossier le titre du sous-dossier
                     }  
                 }         
+             //echo "<pre>";
+             //var_dump($table);
+             //echo "</pre>";
             }
             
             // echo "<pre>";
@@ -409,13 +415,16 @@ session_start();
             $res_droite = $con->query($query_droite);
             while($row = mysqli_fetch_array($res_droite, MYSQLI_ASSOC))
             {
+		/*echo "<pre>";
+		var_dump($row);
+		echo "</pre>";*/
                 $filename = "entries/".$row["dossier"]."/".$row["id"].".html";
                 $handle = fopen($filename, "r");
                 $contents = fread($handle, filesize($filename));
                 $entryfinal = $contents;
                 fclose($handle);
-           
-                // Afficher les notes
+
+                // Affichage des notes
                 echo '<div id="note'.$row['id'].'" class="notecard">
                     <div class="innernote">
                     
@@ -426,7 +435,7 @@ session_start();
                         
                         <div class="contain_doss_tags" >
 							
-							<div class="icon_doss">'.$row["id"].'&nbsp;<span class="fa fa-folder"></div>
+							<div class="icon_doss">'.$row["id"].'&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-folder"></div>
 							<div class="name_doss"><span><input size="15px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateiddoss(this);" id="doss'.$row['id'].'" type="text" placeholder="Dossier ?" value="'.$row['dossier'].'"></input></span></div>
                             							
                             <div class="icon_sousdoss"><span class="fa fa-folder-open"></div>
