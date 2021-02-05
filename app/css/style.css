@@ -76,17 +76,17 @@ body {
 }
 
 .form_search{
-    margin-right:20px; 
-    padding:0px;
+    margin-right: 20px; 
+    padding: 0px;
     display: inline-block;
-    width:20%;
+    width: 30%;
 }
 
 .form_search_tags{
-    margin:0px; 
-    padding:0px;
+    margin: 0px; 
+    padding: 0px;
     display: inline-block;
-    width:20%;
+    width: 30%;
 }
 
 .contains_doss_tags

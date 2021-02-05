@@ -286,7 +286,7 @@ function update(){
     var curdate = new Date();
     var curtime = curdate.getTime();
     lastudpdate = curtime;
-    $('#lastupdated'+editingnote).html('<b><span style="color:#FF0000";>Enregistrement en cours...</span></b>');
+    $('#lastupdated'+editingnote).html('<b><span style="color:#FF0000";>Enregistrement...</span></b>');
 }
 
 $('body').on( 'keyup', '.name_doss', function (){

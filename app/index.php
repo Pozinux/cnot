@@ -433,7 +433,7 @@ session_start();
 							<div class="name_sousdoss"><span><input size="15px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateidsousdoss(this);" id="sousdoss'.$row['id'].'" type="text" placeholder="Sous-dossier ?" value="'.$row['sousdossier'].'"></input></span></div>
 							
 							<div class="icon_tag"><span style="text-align:center; font-size:12px;" class="fa fa-tag"></div>
-							<div class="name_tags"><span><input size="30px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tags" onfocus="updateidtags(this);" id="tags'.$row['id'].'" type="text" placeholder="Tags ?" value="'.$row['tags'].'"></input></span></div>
+							<div class="name_tags"><span><input size="50px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tags" onfocus="updateidtags(this);" id="tags'.$row['id'].'" type="text" placeholder="Tags ?" value="'.$row['tags'].'"></input></span></div>
                         </div>
                         
                         <hr>                        
