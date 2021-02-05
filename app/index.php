@@ -276,8 +276,6 @@ session_start();
     <!-- COLONNE MILIEU -->	
     <div id="col_milieu">
     
-    <br>
-         
 	<!-- Suivant les cas, on créé les requêtes pour l'arborescence de gauche et la liste de droite -->  
 	
     <?php
@@ -297,7 +295,7 @@ session_start();
         
         // Afficher le dossier ou sous dossier en gras en haut de la liste
                 
-        ?><div align = "center"><b><h4><?php echo $dossier_en_cours." / ".$sousdossier;?></h4></b></div><br><?php
+        ?><div align = "center"><b><h4><?php echo $dossier_en_cours." / ".$sousdossier;?></h4></b></div><?php
 		
         $res_milieu = $con->query($query_milieu);
  		
@@ -346,7 +344,7 @@ session_start();
             foreach ($value as $v2) 
             {           			
                 echo "<form action=index.php><input type=hidden name=note>                        
-                        <a class=links_arbo_gauche href='index.php?doss=".$key."&sousdossier=".$sousdossier."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 15px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
+                        <a class=links_arbo_gauche href='index.php?doss=".$key."&sousdossier=".$sousdossier."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 5px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
                      </form>";
 
                 echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les notes
@@ -424,18 +422,18 @@ session_start();
                         <span style="cursor:pointer" title="Supprimer cette note" onclick="deleteNote(\''.$row['id'].'\')" class="fas fa-trash pull-right icon_corbeille"></span>
              
                     
-                        <div id="lastupdated'.$row['id'].'" class="lastupdated">Dernière modification le '.formatDateTime(strtotime($row['updated'])).'</div>
+                        <div id="lastupdated'.$row['id'].'" class="lastupdated">'.formatDateTime(strtotime($row['updated'])).'</div>
                         
                         <div class="contain_doss_tags" >
 							
 							<div class="icon_doss">'.$row["id"].'&nbsp;<span class="fa fa-folder"></div>
-							<div class="name_doss"><span><input size="40px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateiddoss(this);" id="doss'.$row['id'].'" type="text" placeholder="Dossier ?" value="'.$row['dossier'].'"></input></span></div>
+							<div class="name_doss"><span><input size="15px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateiddoss(this);" id="doss'.$row['id'].'" type="text" placeholder="Dossier ?" value="'.$row['dossier'].'"></input></span></div>
                             							
                             <div class="icon_sousdoss"><span class="fa fa-folder-open"></div>
-							<div class="name_sousdoss"><span><input size="40px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateidsousdoss(this);" id="sousdoss'.$row['id'].'" type="text" placeholder="Sous-dossier ?" value="'.$row['sousdossier'].'"></input></span></div>
+							<div class="name_sousdoss"><span><input size="15px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateidsousdoss(this);" id="sousdoss'.$row['id'].'" type="text" placeholder="Sous-dossier ?" value="'.$row['sousdossier'].'"></input></span></div>
 							
 							<div class="icon_tag"><span style="text-align:center; font-size:12px;" class="fa fa-tag"></div>
-							<div class="name_tags"><span><input size="40px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tags" onfocus="updateidtags(this);" id="tags'.$row['id'].'" type="text" placeholder="Tags ?" value="'.$row['tags'].'"></input></span></div>
+							<div class="name_tags"><span><input size="30px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tags" onfocus="updateidtags(this);" id="tags'.$row['id'].'" type="text" placeholder="Tags ?" value="'.$row['tags'].'"></input></span></div>
                         </div>
                         
                         <hr>                        
