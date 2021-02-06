@@ -441,7 +441,7 @@ session_start();
                         
                         <div class="contain_doss_tags" >
 							
-							<div class="icon_doss">'.$row["id"].'&nbsp;<span class="fa fa-folder"></div>
+							<div class="icon_doss">'.$row["id"].'&nbsp;&nbsp;&nbsp;<span class="fa fa-folder"></div>
 							<div class="name_doss"><span><input size="40px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateiddoss(this);" id="dossier'.$row['id'].'" type="text" placeholder="Dossier ?" value="'.$row['dossier'].'"></input></span></div>
                             							
                             <div class="icon_sousdoss"><span class="fa fa-folder-open"></div>
