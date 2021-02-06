@@ -190,8 +190,8 @@ session_start();
                     $table[$row1["dossier"]] = array(); // ...on insert au nouveau tableau global un nouveau tableau vide au nom de ce dossier
                 }
                 
-                // Si le sous-dossier a déjà été rajouté au tableau
-                if(multi_array_search($row1["sousdossier"], $table))
+                // Si le sous-dossier a déjà été rajouté au tableau                
+                if(multi_array_search($row1["sousdossier"], $table[$row1["dossier"]]))
                 {
                     // Ne rien faire
                 }
