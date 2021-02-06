@@ -66,18 +66,33 @@ function updatenote(){
     $('#newnotes').hide().show(0);
 }
 
-function newnote(dossier_selected){
+function newnote(dossier_selected, sousdossier){
     if (dossier_selected !== '') 
-    {
-        $.post( "insertnew.php", {dossier: dossier_selected, pass: app_pass, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
-        .done(function(data) {
-            if(data=='1') 
-            {
-                $(window).scrollTop(0);
-                location.reload(true);
-            }
-            else alert(data);
-        });
+    {       
+        if (sousdossier !== '') 
+        {
+            $.post( "insertnew.php", {dossier: dossier_selected, sousdossier: sousdossier, pass: app_pass, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
+            .done(function(data) {
+                if(data=='1') 
+                {
+                    $(window).scrollTop(0);
+                    location.reload(true);
+                }
+                else alert(data);
+            });
+        }
+        else
+        {
+            $.post( "insertnew.php", {dossier: dossier_selected, pass: app_pass, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
+            .done(function(data) {
+                if(data=='1') 
+                {
+                    $(window).scrollTop(0);
+                    location.reload(true);
+                }
+                else alert(data);
+            });
+        }       
     }
     else
     {
@@ -286,7 +301,7 @@ function update(){
     var curdate = new Date();
     var curtime = curdate.getTime();
     lastudpdate = curtime;
-    $('#lastupdated'+editingnote).html('<b><span style="color:#FF0000";>Enregistrement...</span></b>');
+    $('#lastupdated'+editingnote).html('<b><span style="color:#FF0000";>Enregistrement en cours...</span></b>');
 }
 
 $('body').on( 'keyup', '.name_doss', function (){

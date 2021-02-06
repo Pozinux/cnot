@@ -11,8 +11,9 @@
 	$now = $_POST['now'];
     $seconds = $now;
     $dossier = $_POST['dossier'];
+    $sousdossier = $_POST['sousdossier'];
 
-	$query="INSERT into entries (heading,entry,created,updated,dossier) values ('Note sans titre','','".date("Y-m-d H:i:s", $seconds)."','".date("Y-m-d H:i:s", $seconds)."','".htmlspecialchars($dossier,ENT_QUOTES)."')";
+	$query="INSERT into entries (heading,entry,created,updated,dossier,sousdossier) values ('Note sans titre','','".date("Y-m-d H:i:s", $seconds)."','".date("Y-m-d H:i:s", $seconds)."','".htmlspecialchars($dossier,ENT_QUOTES)."','".htmlspecialchars($sousdossier,ENT_QUOTES)."')";
 	if($con->query($query)) die('1');
 	else die(mysqli_error($con));
 ?>

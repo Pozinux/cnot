@@ -62,7 +62,7 @@ session_start();
 	<link href='https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link type="text/css" rel="stylesheet" href="css/style.css"/> 
 	<script src="js/jquery.min.js"></script> 
-        <link rel="stylesheet" href="css/font-awesome.css" />
+    <link rel="stylesheet" href="css/font-awesome.css" />
 	<!--<link rel="stylesheet" type="text/css" href="css/toggle-switch.css" />-->
 	<link rel="stylesheet" type="text/css" href="css/page.css" />
     
@@ -79,8 +79,8 @@ session_start();
 	<!--<script type="text/javascript" src="js/plugins/jquery.popline.blockformat.js"></script> -->
 	<script type="text/javascript" src="js/plugins/jquery.popline.social.js"></script>
 	<script type="text/javascript" src="js/plugins/jquery.popline.textcolor.js"></script>
-        <script type="text/javascript" src="js/plugins/jquery.popline.backgroundcolor.js"></script>
-        <script type="text/javascript" src="js/plugins/jquery.popline.fontsize.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.popline.backgroundcolor.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery.popline.fontsize.js"></script>
 
 	<script>
 		var app_pass = '<?php echo APPPASSWORD;?>';
@@ -95,7 +95,7 @@ session_start();
     
         <!-- Menu -->
         <div class="containbuttons">
-            <div class="newbutton" onclick="newnote('<?php echo $new_dossier_name;?>');"><span style="text-align:center;"><span title="Créer une nouvelle note" class="fas fa-file-medical"></span></span></div>
+            <div class="newbutton" onclick="newnote('<?php echo $new_dossier_name;?>', '<?php echo $sousdossier;?>');"><span style="text-align:center;"><span title="Créer une nouvelle note" class="fas fa-file-medical"></span></span></div>
             <div class="newdossierbutton" onclick="createNewdossierJS();"><span style="text-align:center;"><span title="Créer un nouveau dossier" class="fas fa-folder-plus"></span></span></div>
             <div class="trashnotebutton" onclick="window.location = 'trash.php';"><span style="text-align:center;"><span title="Aller à la corbeille" class="fas fa-trash-alt"></span></span></div>
             <div class="deletedossierbutton" onclick="deletedossierJS('<?php echo $dossier_en_cours;?>');"><span style="text-align:center;"><span title="Supprimer le dossier en cours" class="fas fa-folder-minus"></span></span></div>
@@ -120,16 +120,14 @@ session_start();
                 {
                     $query_gauche = 'SELECT dossier, sousdossier FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
                     $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\') ORDER by updated DESC'; 
-                    //$query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'%\' AND sousdossier LIKE \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
-                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'%\' AND sousdossier LIKE \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
                 }
                 else // sinon c'est une recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché // C'est aussi l'affichage de toutes les notes (recherche "")
                 {
                     $query_gauche = 'SELECT dossier, sousdossier FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
                     $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
-                    //$query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'%\' AND sousdossier LIKE \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';                    
-                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.$dossier_en_cours.'\' AND sousdossier = \''.$sousdossier.'\' ORDER by updated DESC';                    
-	            //echo $query_droite;
+                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'%\' AND sousdossier LIKE \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';                    
+                    //$query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \\'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND sousdossier = \\'.htmlspecialchars($sousdossier,ENT_QUOTES).'\' ORDER by updated DESC';                    
 
                 }  
             }
@@ -140,15 +138,15 @@ session_start();
                     if($tags_search!='') // c'est une recherche dans les tags donc on ne veut afficher que les notes qui contiennent le tag
                     {
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
-                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
-                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
                     }
                     else // sinon c'est un recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché // C'est aussi l'affichage de toutes les notes (recherche "")
                     {
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
-                        //$query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
-                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
-                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC LIMIT 50';
+                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC LIMIT 50';
+
                     }
                 }
                 else // sinon c'est que l'on recherche sur un dossier en particulier
@@ -164,7 +162,6 @@ session_start();
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
                         $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
                         $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
-                        //echo $query_droite; 
 
                     }
                 } 
@@ -197,7 +194,7 @@ session_start();
                     $table[$row1["dossier"]] = array(); // ...on insert au nouveau tableau global un nouveau tableau vide au nom de ce dossier
                 }
                 
-                // Si le sous-dossier a déjà été rajouté au tableau 
+                // Si le sous-dossier a déjà été rajouté au tableau
                 if(multi_array_search($row1["sousdossier"], $table))
                 {
                     // Ne rien faire
@@ -213,9 +210,6 @@ session_start();
                         $table[$row1["dossier"]][] = $row1["sousdossier"]; // Append / on ajoute au tableau global/tableau du dossier le titre du sous-dossier
                     }  
                 }         
-             //echo "<pre>";
-             //var_dump($table);
-             //echo "</pre>";
             }
             
             // echo "<pre>";
@@ -282,6 +276,8 @@ session_start();
     <!-- COLONNE MILIEU -->	
     <div id="col_milieu">
     
+    <br>
+         
 	<!-- Suivant les cas, on créé les requêtes pour l'arborescence de gauche et la liste de droite -->  
 	
     <?php
@@ -301,7 +297,7 @@ session_start();
         
         // Afficher le dossier ou sous dossier en gras en haut de la liste
                 
-        ?><div align = "center"><b><h4><?php echo $dossier_en_cours." / ".$sousdossier;?></h4></b></div><?php
+        ?><div align = "center"><b><h4><?php echo $dossier_en_cours." / ".$sousdossier;?></h4></b></div><br><?php
 		
         $res_milieu = $con->query($query_milieu);
  		
@@ -350,7 +346,7 @@ session_start();
             foreach ($value as $v2) 
             {           			
                 echo "<form action=index.php><input type=hidden name=note>                        
-                        <a class=links_arbo_gauche href='index.php?doss=".$key."&sousdossier=".$sousdossier."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 5px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
+                        <a class=links_arbo_gauche href='index.php?doss=".$key."&sousdossier=".$sousdossier."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 15px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
                      </form>";
 
                 echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les notes
@@ -415,34 +411,31 @@ session_start();
             $res_droite = $con->query($query_droite);
             while($row = mysqli_fetch_array($res_droite, MYSQLI_ASSOC))
             {
-		/*echo "<pre>";
-		var_dump($row);
-		echo "</pre>";*/
                 $filename = "entries/".$row["dossier"]."/".$row["id"].".html";
                 $handle = fopen($filename, "r");
                 $contents = fread($handle, filesize($filename));
                 $entryfinal = $contents;
                 fclose($handle);
-
-                // Affichage des notes
+           
+                // Afficher les notes
                 echo '<div id="note'.$row['id'].'" class="notecard">
                     <div class="innernote">
                     
                         <span style="cursor:pointer" title="Supprimer cette note" onclick="deleteNote(\''.$row['id'].'\')" class="fas fa-trash pull-right icon_corbeille"></span>
              
                     
-                        <div id="lastupdated'.$row['id'].'" class="lastupdated">'.formatDateTime(strtotime($row['updated'])).'</div>
+                        <div id="lastupdated'.$row['id'].'" class="lastupdated">Dernière modification le '.formatDateTime(strtotime($row['updated'])).'</div>
                         
                         <div class="contain_doss_tags" >
 							
-							<div class="icon_doss">'.$row["id"].'&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-folder"></div>
-							<div class="name_doss"><span><input size="15px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateiddoss(this);" id="doss'.$row['id'].'" type="text" placeholder="Dossier ?" value="'.$row['dossier'].'"></input></span></div>
+							<div class="icon_doss">'.$row["id"].'&nbsp;<span class="fa fa-folder"></div>
+							<div class="name_doss"><span><input size="40px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateiddoss(this);" id="doss'.$row['id'].'" type="text" placeholder="Dossier ?" value="'.$row['dossier'].'"></input></span></div>
                             							
                             <div class="icon_sousdoss"><span class="fa fa-folder-open"></div>
-							<div class="name_sousdoss"><span><input size="15px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateidsousdoss(this);" id="sousdoss'.$row['id'].'" type="text" placeholder="Sous-dossier ?" value="'.$row['sousdossier'].'"></input></span></div>
+							<div class="name_sousdoss"><span><input size="40px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateidsousdoss(this);" id="sousdoss'.$row['id'].'" type="text" placeholder="Sous-dossier ?" value="'.$row['sousdossier'].'"></input></span></div>
 							
 							<div class="icon_tag"><span style="text-align:center; font-size:12px;" class="fa fa-tag"></div>
-							<div class="name_tags"><span><input size="50px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tags" onfocus="updateidtags(this);" id="tags'.$row['id'].'" type="text" placeholder="Tags ?" value="'.$row['tags'].'"></input></span></div>
+							<div class="name_tags"><span><input size="40px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tags" onfocus="updateidtags(this);" id="tags'.$row['id'].'" type="text" placeholder="Tags ?" value="'.$row['tags'].'"></input></span></div>
                         </div>
                         
                         <hr>                        
