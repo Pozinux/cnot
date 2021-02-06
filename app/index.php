@@ -88,7 +88,6 @@ session_start();
 <body>
 	<!-- COLONNE 1 -->	
     <div id="col_1">
-    
         <!-- Menu -->
         <div class="containbuttons">
             <div class="newbutton" onclick="newnote('<?php echo $dossier;?>', '<?php echo $sousdossier;?>');"><span style="text-align:center;"><span title="Créer une nouvelle note" class="fas fa-file-medical"></span></span></div>
@@ -105,6 +104,9 @@ session_start();
         <!-- Suivant les cas, on créé les requêtes pour l'arborescence de gauche, du milieu et la liste de droite -->  
         
             <?php
+            
+            // echo "dossier : $dossier<br />";
+            // echo "sousdossier : $sousdossier<br />";
       
             // echo "<pre>";
             // var_dump($sousdossier);
@@ -266,6 +268,7 @@ session_start();
      
         ?>
         </div>
+    
     
     
     <!-- COLONNE MILIEU -->	

@@ -46,7 +46,7 @@ function updatenote(){
     var ent = $("#entry"+editingnote).html();    
     var ent = ent.replace(/<br\s*[\/]?>/gi, "&nbsp;<br>");  // Remplacer les lignes vides par &nbsp; pour que si on format en code le saut de ligne est gardé    
     var entcontent = $("#entry"+editingnote).text();
-    var doss = document.getElementById("doss"+editingnote).value;
+    var doss = document.getElementById("dossier"+editingnote).value;
     var sousdoss = document.getElementById("sousdoss"+editingnote).value;	
     var tags = document.getElementById("tags"+editingnote).value;
 
@@ -123,7 +123,6 @@ function renamedossierJS(dossier_en_cours) {
         var nouveau_nom_dossier = window.prompt("Nouveau nom pour le dossier "+dossier_a_renommer+" ?");
         if (nouveau_nom_dossier != null){
             renamedossier(dossier_a_renommer, nouveau_nom_dossier);
-            //window.location.href = "index.php?doss="+nouveau_nom_dossier;
         }
     }
     else
@@ -140,44 +139,6 @@ function createNewdossierJS() {
         newnote(new_dossier_to_create);                                       
     }           
 }                 
-
-/*function createNewdossierJS(dossier_en_cours) {                    
-    var new_dossier_to_create = window.prompt("Nom du dossier à créer ?");
-    
-    if (new_dossier_to_create != null){
-        //console.log("TPO : " + dossier_en_cours);
-        if (dossier_en_cours !== '') // si on veut créer un sous-dossier
-        {
-            createnewsubdossier(new_dossier_to_create, dossier_en_cours);
-            // sousdossierpath = dossier_en_cours + "/" + new_dossier_to_create;
-            // newnote(new_dossier_to_create);
-        }
-        else // si on veut créer un dossier à la racine
-        {
-            createnewdossier(new_dossier_to_create);
-            newnote(new_dossier_to_create);                           
-        }                        
-    }           
-}*/   
-
-/*function createnewsubdossier(new_dossier_to_create, dossier_actuel){
-    if (new_dossier_to_create) 
-    {
-        if (/^[A-Za-z0-9À-ü \-_]+$/i.test(new_dossier_to_create)) 
-        {
-            $.post( "createsousdossier.php", {new_dossier: new_dossier_to_create, dossier_parent: dossier_actuel, pass: app_pass})
-            setTimeout(function(){ window.location.href = "index.php?doss="+dossier_actuel; }, 1000);
-        }
-        else
-        {
-            confirm("Le nom du sous-dossier ne peut contenir que des espaces, des lettres, des chiffres, des tirets ou des underscores. Aucune modification effectuée.");
-        } 
-    }
-    else
-    {
-       alert("Problème avec le nom du dossier fourni. Nom du dossier fourni vide ou égal à 0. Aucune création effectuée.");
-    }
-}*/
 
 function createnewdossier(new_dossier_to_create){
     if (new_dossier_to_create) 
@@ -230,7 +191,7 @@ function removedossier(dossier_to_remove){
         var r = confirm("Êtes-vous sûr de vouloir supprimer définitivement le dossier \""+dossier_to_remove+"\" et toutes ses notes (également celles de ce dossier qui sont dans la corbeille ?) Elles seront perdues à jamais !");
         if (r == true) {
             $.post( "removedossier.php", {del_dossier: dossier_to_remove, pass: app_pass})
-            setTimeout(function(){ window.location.href = "index.php?doss=tous"; }, 1000);
+            setTimeout(function(){ window.location.href = "index.php?dossier=tous"; }, 1000);
         }
     }
     else
@@ -242,7 +203,7 @@ function removedossier(dossier_to_remove){
 
 function functionSendGetdossier() {
     var doss = document.getElementById("mydossierSelect").value;
-    window.location.href = "index.php?doss="+doss;
+    window.location.href = "index.php?dossier="+doss;
 }   
 
 function emptytrash(){
@@ -270,7 +231,7 @@ function checkedit(){
 
 function deletePermanent(iid){
     var r = confirm("Êtes-vous sûr de vouloir supprimer définitivement la note \""+document.getElementById("inp"+iid).value+"\" ? Elle sera perdue à jamais !");
-    var dossier_name = document.getElementById("doss"+iid).value;	
+    var dossier_name = document.getElementById("dossier"+iid).value;	
     if (r == true) {
         $.post( "permanentDelete.php", {pass: app_pass, id:iid, dossier: dossier_name})
         .done(function(data) {
