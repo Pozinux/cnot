@@ -120,15 +120,13 @@ session_start();
                 {
                     $query_gauche = 'SELECT dossier, sousdossier FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
                     $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\') ORDER by updated DESC'; 
-                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'%\' AND sousdossier LIKE \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
                 }
-                else // sinon c'est une recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché // C'est aussi l'affichage de toutes les notes (recherche "")
+                else // sinon c'est une recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché ou afficher toutes les notes
                 {
                     $query_gauche = 'SELECT dossier, sousdossier FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
                     $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
-                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'%\' AND sousdossier LIKE \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';                    
-                    //$query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \\'.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND sousdossier = \\'.htmlspecialchars($sousdossier,ENT_QUOTES).'\' ORDER by updated DESC';                    
-
+                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
                 }  
             }
             else // Sinon c'est que l'on a selectionné un dossier dans la liste
@@ -138,14 +136,16 @@ session_start();
                     if($tags_search!='') // c'est une recherche dans les tags donc on ne veut afficher que les notes qui contiennent le tag
                     {
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
-                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
-                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
                     }
                     else // sinon c'est un recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché // C'est aussi l'affichage de toutes les notes (recherche "")
                     {
-                        $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
-                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
-                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier LIKE \'%'.htmlspecialchars($dossier_filtre,ENT_QUOTES).'%\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC LIMIT 50';
+                        $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC';
+                        //echo 'TPO :'.$dossier_filtre;
+                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        //echo 'TPO :'.$query_milieu;
+                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC LIMIT 50';
 
                     }
                 }
@@ -157,7 +157,7 @@ session_start();
                         $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
                         $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
                     }
-                    else // sinon c'est un recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché // C'est aussi l'affichage de toutes les notes (recherche "")
+                    else // sinon c'est un recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché ou juste afficher toutes les notes de ce dossier
                     {
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
                         $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 

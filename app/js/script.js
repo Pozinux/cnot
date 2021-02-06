@@ -71,6 +71,7 @@ function newnote(dossier_selected, sousdossier){
     {       
         if (sousdossier !== '') 
         {
+            // Créer une note dans un sous-dossier
             $.post( "insertnew.php", {dossier: dossier_selected, sousdossier: sousdossier, pass: app_pass, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
             .done(function(data) {
                 if(data=='1') 
@@ -83,6 +84,7 @@ function newnote(dossier_selected, sousdossier){
         }
         else
         {
+            // Créer une note dans un dossier
             $.post( "insertnew.php", {dossier: dossier_selected, pass: app_pass, now: (new Date().getTime()/1000)-new Date().getTimezoneOffset()*60})
             .done(function(data) {
                 if(data=='1') 
