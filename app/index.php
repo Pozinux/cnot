@@ -344,7 +344,7 @@ session_start();
             foreach ($value as $v2) 
             {           			
                 echo "<form action=index.php><input type=hidden name=note>                        
-                        <a class=links_arbo_gauche href='index.php?dossier=".$key."&sousdossier=".$sousdossier."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 15px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
+                        <a class=links_arbo_gauche href='index.php?dossier=".$key."&sousdossier=".$sousdossier."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 8px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
                      </form>";
 
                 echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les notes
