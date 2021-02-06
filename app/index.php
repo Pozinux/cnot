@@ -8,40 +8,36 @@ session_start();
 	$pass=$_SESSION['pass'];
 	$search = $_POST['search'];
     $tags_search = $_POST['tags_search'];
-    $dossier_en_cours = $_GET['doss'];
+    $dossier = $_GET['dossier'];
     $sousdossier = $_GET['sousdossier'];
     $dossier_search = $_POST['dossier_search'];
+    $sousdossier_search = $_POST['sousdossier_search'];
     $note = $_GET['note'];
     
-    if (isset($dossier_en_cours))
-    {
-        if ($dossier_en_cours == "tous")
-		{
-            $new_dossier_name = "Nouveau";
-            $dossier_search = '';
-            $dossier_filtre = '';
-        }
-        else
-        {
-            $new_dossier_name = $dossier_en_cours;
-            $dossier_search = $dossier_en_cours;
-            $dossier_filtre = $dossier_en_cours;
-        }
-    }
+    // if (isset($dossier))
+    // {
+        // if ($dossier == "tous")
+		// {
+            // $new_dossier_name = "Nouveau";
+            // $dossier_search = '';
+            // $dossier = '';
+        // }
+        // else
+        // {
+            // $new_dossier_name = $dossier;
+            // $dossier_search = $dossier;
+            // $dossier = $dossier;
+        // }
+    // }
 
     if (isset($dossier_search))
     {
-        if ($dossier_search == "tous"){
-            $new_dossier_name = "Nouveau";
-            $dossier_search = '';
-            $dossier_filtre = '';
-        }
-        else
-        {
-            $new_dossier_name = $dossier_search;
-            $dossier_en_cours = $dossier_search;
-            $dossier_filtre = $dossier_search;
-        }
+        $dossier = $dossier_search;
+    }
+    
+    if (isset($sousdossier_search))
+    {
+        $sousdossier = $sousdossier_search;
     }
     
 	if($pass!=APPPASSWORD)
@@ -95,12 +91,12 @@ session_start();
     
         <!-- Menu -->
         <div class="containbuttons">
-            <div class="newbutton" onclick="newnote('<?php echo $new_dossier_name;?>', '<?php echo $sousdossier;?>');"><span style="text-align:center;"><span title="Créer une nouvelle note" class="fas fa-file-medical"></span></span></div>
+            <div class="newbutton" onclick="newnote('<?php echo $dossier;?>', '<?php echo $sousdossier;?>');"><span style="text-align:center;"><span title="Créer une nouvelle note" class="fas fa-file-medical"></span></span></div>
             <div class="newdossierbutton" onclick="createNewdossierJS();"><span style="text-align:center;"><span title="Créer un nouveau dossier" class="fas fa-folder-plus"></span></span></div>
             <div class="trashnotebutton" onclick="window.location = 'trash.php';"><span style="text-align:center;"><span title="Aller à la corbeille" class="fas fa-trash-alt"></span></span></div>
-            <div class="deletedossierbutton" onclick="deletedossierJS('<?php echo $dossier_en_cours;?>');"><span style="text-align:center;"><span title="Supprimer le dossier en cours" class="fas fa-folder-minus"></span></span></div>
+            <div class="deletedossierbutton" onclick="deletedossierJS('<?php echo $dossier;?>');"><span style="text-align:center;"><span title="Supprimer le dossier en cours" class="fas fa-folder-minus"></span></span></div>
             <div class="lister_tags" onclick="window.location = 'listertags.php';"><span style="text-align:center;"><span title="Lister les tags" class="fas fa-tags"></span></span></div>
-            <div class="renamedossierbutton" onclick="renamedossierJS('<?php echo $dossier_en_cours;?>');"><span style="text-align:center;"><span title="Renommer le dossier en cours" class="fas fa-edit"></span></span></div>
+            <div class="renamedossierbutton" onclick="renamedossierJS('<?php echo $dossier;?>');"><span style="text-align:center;"><span title="Renommer le dossier en cours" class="fas fa-edit"></span></span></div>
             <div class="logoutbutton" onclick="window.location = 'logout.php';"><span style="text-align:center;"><span title="Se déconnecter" class="fas fa-sign-out-alt"></span></span></div>
         </div> 
         
@@ -119,19 +115,19 @@ session_start();
                 if($tags_search!='') // c'est une recherche dans les tags donc on ne veut afficher que les notes qui contiennent le tag
                 {
                     $query_gauche = 'SELECT dossier, sousdossier FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
-                    $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\') ORDER by updated DESC'; 
-                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                    $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($sousdossier,ENT_QUOTES).'%\') ORDER by updated DESC'; 
+                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
                 }
                 else // sinon c'est une recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché ou afficher toutes les notes
                 {
                     $query_gauche = 'SELECT dossier, sousdossier FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
-                    $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
-                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                    $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
+                    $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
                 }  
             }
             else // Sinon c'est que l'on a selectionné un dossier dans la liste
             {
-                if($dossier_filtre == ''){ // Si on recherche sur toutes les notes
+                if($dossier == ''){ // Si on recherche sur toutes les notes
                 
                     if($tags_search!='') // c'est une recherche dans les tags donc on ne veut afficher que les notes qui contiennent le tag
                     {
@@ -142,7 +138,7 @@ session_start();
                     else // sinon c'est un recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché // C'est aussi l'affichage de toutes les notes (recherche "")
                     {
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC';
-                        //echo 'TPO :'.$dossier_filtre;
+                        //echo 'TPO :'.$dossier;
                         $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
                         //echo 'TPO :'.$query_milieu;
                         $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC LIMIT 50';
@@ -154,14 +150,14 @@ session_start();
                     if($tags_search!='') // c'est une recherche dans les tags donc on ne veut afficher que les notes qui contiennent le tag
                     {
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
-                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
-                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
+                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
                     }
                     else // sinon c'est un recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché ou juste afficher toutes les notes de ce dossier
                     {
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
-                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
-                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
+                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
 
                     }
                 } 
@@ -217,10 +213,9 @@ session_start();
             // echo "</pre>";
             
             // Afficher le dossier "Toutes les notes" pour pouvoir cliquer dessus revenir à la vue de tous les dossiers
-            $key = "tous";
             $key2 = "Toutes les notes";
             echo "<form action=index.php><input type=hidden name=note>                        
-                        <a class=links_arbo_gauche href='index.php?doss=".$key."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='fas fa-folder'></div>".$key2."</a>
+                        <a class=links_arbo_gauche href='index.php' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='fas fa-folder'></div>".$key2."</a>
                      </form>";
            
             echo "<div style='height: 2px'></div>"; // Ajuster la distance entre le dossier et son premier sous-dossier
@@ -230,7 +225,7 @@ session_start();
             {                    
                 // Afficher les dossiers
                 echo "<form action=index.php><input type=hidden name=note>                        
-                            <a class=links_arbo_gauche href='index.php?doss=".$key."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='far fa-folder-open'></div>".$key."</a>
+                            <a class=links_arbo_gauche href='index.php?dossier=".$key."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='far fa-folder-open'></div>".$key."</a>
                          </form>";
                
                 echo "<div style='height: 2px'></div>"; // Ajuster la distance entre le dossier et sa première note
@@ -245,7 +240,7 @@ session_start();
                     if (isset($v2)){ // Si la note a un sous-dossier
                         // opacity:0; pour icon_sousdossier pour que l'icone n'apparaisse pas mais garde l'espace (pour qu'il y ait un décalage / comme dans Evernote)
                         echo "<form action=index.php><input type=hidden name=note>                        
-                                <a class=links_arbo_gauche href='index.php?doss=".$key."&sousdossier=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_sousdossier; style='opacity:0; padding-right: 7px; padding-left: 10px; font-size:11px;' class='far fa-folder'></div>".$v2."</a>
+                                <a class=links_arbo_gauche href='index.php?dossier=".$key."&sousdossier=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_sousdossier; style='opacity:0; padding-right: 7px; padding-left: 10px; font-size:11px;' class='far fa-folder'></div>".$v2."</a>
                              </form>";
 
                         echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les sous-dossiers
@@ -259,7 +254,7 @@ session_start();
                 // foreach ($value as $v2) 
                 // {           			
                     // echo "<form action=index.php><input type=hidden name=note>                        
-                            // <a class=links_arbo_gauche href='index.php?doss=".$key."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 15px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
+                            // <a class=links_arbo_gauche href='index.php?dossier=".$key."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 15px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
                          // </form>";
 
                     // echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les notes
@@ -287,9 +282,9 @@ session_start();
 	    $note = str_replace("&#039;", "'", $note); // car les ' sont enregistrés en base comme des "&#039;"	
 	    $note = str_replace("&quot;", "\"", $note); // car les ' sont enregistrés en base comme des "&#039;"	
 	    #echo $note;
-            //$query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_filtre,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; // Classé par dossier par ordre alphabétique
-            //$query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
-            $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier_en_cours,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($note,ENT_QUOTES).'%\')';     
+            //$query_gauche = 'SELECT dossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; // Classé par dossier par ordre alphabétique
+            //$query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND sousdossier = \''.htmlspecialchars($sousdossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
+            $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($note,ENT_QUOTES).'%\')';     
         }
         
       
@@ -297,7 +292,7 @@ session_start();
         
         // Afficher le dossier ou sous dossier en gras en haut de la liste
                 
-        ?><div align = "center"><b><h4><?php echo $dossier_en_cours." / ".$sousdossier;?></h4></b></div><br><?php
+        ?><div align = "center"><b><h4><?php echo $dossier." / ".$sousdossier;?></h4></b></div><br><?php
 		
         $res_milieu = $con->query($query_milieu);
  		
@@ -346,7 +341,7 @@ session_start();
             foreach ($value as $v2) 
             {           			
                 echo "<form action=index.php><input type=hidden name=note>                        
-                        <a class=links_arbo_gauche href='index.php?doss=".$key."&sousdossier=".$sousdossier."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 15px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
+                        <a class=links_arbo_gauche href='index.php?dossier=".$key."&sousdossier=".$sousdossier."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 15px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
                      </form>";
 
                 echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les notes
@@ -361,15 +356,16 @@ session_start();
 	<!-- COLONNE 2 -->
     <div id="col_2">
     
-        <!-- Recherche --> 
-        
+        <!-- Recherche -->
+
 	   <div class="contains_forms_search">
 			<form class="form_search" action="index.php" method="POST">          
 				<div class="right-inner-addon">
 					<i class="fas fa-search"></i>
 					<input autocomplete="off" autocapitalize="off" spellcheck="false" id="note-search" type="search" name="search" class="search form-control" placeholder="Rechercher dans les notes" onfocus="updateidsearch(this);"/>
 				</div>
-				<input type="hidden" name="dossier_search" value='<?php echo $dossier_search;?>'/>  <!-- Pour envoyer au serveur en post en même temps que la recherche l'info du dossier en cours -->
+				<input type="hidden" name="dossier_search" value='<?php echo $dossier;?>'/>   <!-- Pour envoyer au serveur en post en même temps que la recherche l'info du dossier en cours -->
+   				<input type="hidden" name="sousdossier_search" value='<?php echo $sousdossier;?>'/>   <!-- Pour envoyer au serveur en post en même temps que la recherche l'info du sous-dossier en cours -->
 			</form>
 			
 			<form class="form_search_tags" action="index.php" method="POST">          
@@ -377,33 +373,50 @@ session_start();
 					<i class="fas fa-tags"></i>
 					<input autocomplete="off" autocapitalize="off" spellcheck="false" id="tags-search" type="search" class="form-control search" placeholder="Rechercher dans les tags" onfocus="updateidsearch(this);" name="tags_search"/>
 				</div>  
-					<input type="hidden" name="dossier_search" value='<?php echo $dossier_search;?>'/>  <!-- Pour envoyer au serveur en post en même temps que la recherche l'info du dossier en cours -->
+					<input type="hidden" name="dossier_search" value='<?php echo $dossier;?>'/>  <!-- Pour envoyer au serveur en post en même temps que la recherche l'info du dossier en cours -->
+       				<input type="hidden" name="sousdossier_search" value='<?php echo $sousdossier;?>'/>   <!-- Pour envoyer au serveur en post en même temps que la recherche l'info du sous-dossier en cours -->
 			</form>                 
 		</div> 
                        
         <!-- Recherche - "Résultat pour...." -->             
         <?php
+        
+            // echo "dossier : $dossier<br />";
+            // echo "sousdossier : $sousdossier<br />";
+            // echo "dossier_search : $dossier_search<br />";
+            // echo "sousdossier_search : $sousdossier_search<br />";           
+        
             if($search!='') // on arrive ici suite à une recherche, ça va afficher les résultat de la recherche + le petit icone en croix pour sortir de la recherche
-            {
-                if($dossier_filtre == '') 
+            { 
+                if($dossier == '')  // Si on est sur le dossier toutes les notes
                 {
-                    echo '<br><div style="text-align:center; font-weight:300;"> Résultats pour la recherche de <b>'.$search.'</b> dans toutes les notes existantes <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span style="color:red" class="fa fa-times"></span></span></div><br>';
+                    echo '<br><div style="text-align:center; font-weight:300;"> Résultats pour la recherche de <b>'.$search.'</b> dans le titre et le contenu de <b>toutes les notes existantes</b> <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span style="color:red" class="fa fa-times"></span></span></div><br>';
                 }
-                else
+                else if($sousdossier_search != '')  // Si on est sur un sous-dossier pour la recherche
                 {
-                    echo '<br><div style="text-align:center; font-weight:300;"> Résultats pour la recherche de <b>'.$search.'</b> dans le titre et le contenu des notes du dossier <b>'.$dossier_filtre.'</b> <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span style="color:red" class="fa fa-times"></span></span></div><br>';
+                    echo '<br><div style="text-align:center; font-weight:300;"> Résultats pour la recherche de <b>'.$search.'</b> dans le titre et le contenu des notes du dossier <b>'.$sousdossier_search.'</b> <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span style="color:red" class="fa fa-times"></span></span></div><br>';
+
                 }
+                else // Sinon c'est forcément que l'on est sur un dossier (pas toutes les notes et pas sous-dossier)
+                {
+                    echo '<br><div style="text-align:center; font-weight:300;"> Résultats pour la recherche de <b>'.$search.'</b> dans le titre et le contenu des notes du dossier <b>'.$dossier_search.'</b> <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span style="color:red" class="fa fa-times"></span></span></div><br>';
+                }   
             }
             if($tags_search!='') // on arrive ici suite à une recherche tag, ça va afficher les résultat de la recherche + le petit icone en croix pour sortir de la recherche
             {
-                if($dossier_filtre == '') 
+                if($dossier == '')  // Si on est sur le dossier toutes les notes
                 {
-                    echo '<br><div style="text-align:center; font-weight:300;"> Résultats pour la recherche de <b>'.$tags_search.'</b> dans les tags de toutes les notes existantes <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span style="color:red" class="fa fa-times"></span></span></div><br>';
+                    echo '<br><div style="text-align:center; font-weight:300;"> Résultats pour la recherche de <b>'.$tags_search.'</b> dans les tags de <b>toutes les notes existantes</b> <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span style="color:red" class="fa fa-times"></span></span></div><br>';
                 }
-                else
+                else if($sousdossier_search != '')  // Si on est sur un sous-dossier pour la recherche
                 {
-                    echo '<br><div style="text-align:center; font-weight:300;"> Résultats pour la recherche de <b>'.$tags_search.'</b> dans les tags des notes du dossier <b>'.$dossier_filtre.'</b> <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span style="color:red" class="fa fa-times"></span></span></div><br>';
+                    echo '<br><div style="text-align:center; font-weight:300;"> Résultats pour la recherche de <b>'.$tags_search.'</b> dans les tags des notes du dossier <b>'.$sousdossier_search.'</b> <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span style="color:red" class="fa fa-times"></span></span></div><br>';
+
                 }
+                else // Sinon c'est forcément que l'on est sur un dossier (pas toutes les notes et pas sous-dossier)
+                {
+                    echo '<br><div style="text-align:center; font-weight:300;"> Résultats pour la recherche de <b>'.$tags_search.'</b> dans les tags des notes du dossier <b>'.$dossier_search.'</b> <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span style="color:red" class="fa fa-times"></span></span></div><br>';
+                }   
             }
 			
 			// Liste de droite en fonction de la requête créée plus haut //		
@@ -429,7 +442,7 @@ session_start();
                         <div class="contain_doss_tags" >
 							
 							<div class="icon_doss">'.$row["id"].'&nbsp;<span class="fa fa-folder"></div>
-							<div class="name_doss"><span><input size="40px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateiddoss(this);" id="doss'.$row['id'].'" type="text" placeholder="Dossier ?" value="'.$row['dossier'].'"></input></span></div>
+							<div class="name_doss"><span><input size="40px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateiddoss(this);" id="dossier'.$row['id'].'" type="text" placeholder="Dossier ?" value="'.$row['dossier'].'"></input></span></div>
                             							
                             <div class="icon_sousdoss"><span class="fa fa-folder-open"></div>
 							<div class="name_sousdoss"><span><input size="40px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateidsousdoss(this);" id="sousdoss'.$row['id'].'" type="text" placeholder="Sous-dossier ?" value="'.$row['sousdossier'].'"></input></span></div>
