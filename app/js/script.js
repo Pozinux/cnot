@@ -42,10 +42,17 @@ window.onbeforeunload = function(){
 };
 
 function updatenote(){
+    
+    
+
+    
     var headi = document.getElementById("inp"+editingnote).value;
-    var ent = $("#entry"+editingnote).html();    
+    var ent = $("#entry"+editingnote).html();  // On récupère le contenu de la note et le transforme en html (les images sont converties en base64) pour l'enregistrer dans un fichier (fwrite dans updatenote.php)
+
+    //console.log("RESULTAT :" + ent);
+    
     var ent = ent.replace(/<br\s*[\/]?>/gi, "&nbsp;<br>");  // Remplacer les lignes vides par &nbsp; pour que si on format en code le saut de ligne est gardé    
-    var entcontent = $("#entry"+editingnote).text();
+    var entcontent = $("#entry"+editingnote).text(); // On récupère le texte de la note  pour l'enregistrer en base de donnée (dans updatenote.php)
     var doss = document.getElementById("dossier"+editingnote).value;
     var sousdoss = document.getElementById("sousdoss"+editingnote).value;	
     var tags = document.getElementById("tags"+editingnote).value;

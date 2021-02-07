@@ -429,6 +429,7 @@ session_start();
             {
                 $filename = "entries/".$row["dossier"]."/".$row["id"].".html";
                 $handle = fopen($filename, "r");
+                //$contents = file_get_contents($filename);  // Test pour remplacer fread
                 $contents = fread($handle, filesize($filename));
                 $entryfinal = $contents;
                 fclose($handle);

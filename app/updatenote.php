@@ -10,8 +10,8 @@
 	include 'db_connect.php';
 	$id = $_POST['id'];
 	$heading = $_POST['heading'];
-	$entry = $_POST['entry'];
-	$entrycontent = $_POST['entrycontent'];
+	$entry = $_POST['entry']; // Enregistrement du contenu html (donc avec les images) dans un fichier html. 
+	$entrycontent = $_POST['entrycontent']; // Enregistrement du contenu texte (donc sans les images) en base. 
 	$now = $_POST['now'];
 	$seconds = $now;
 	$dossier = $_POST['dossier'];
@@ -21,9 +21,7 @@
 	$query="SELECT * from entries WHERE id=".$id;
 	$res = $con->query($query);
 	$row = mysqli_fetch_array($res,MYSQLI_ASSOC);
-	
-	$chemin_actuel = "entries/".$row['dossier']."/".$id.".html";
-    
+	    
 	if($dossier != ""){
 		$handle = fopen("entries/".$dossier."/".$id.".html", 'w+') or die("Est-ce que ce dossier existe ?");
 	}
@@ -32,17 +30,22 @@
 		die("Vous devez définir un dossier qui existe déjà.");
 	}
 	
-	$str = fread($handle, filesize($id.".html"));
+    // Test pour remplacer fread
+    //$filename = "entries/".$dossier."/".$id.".html";
+    //$str = file_get_contents($filename);   
+    
+	$str = fread($handle, filesize($id.".html")); // Lecture du fichier en mode binaire
     
 	if(htmlspecialchars($heading,ENT_QUOTES)==$row['heading'] && $entry==$str && htmlspecialchars($dossier,ENT_QUOTES)==$row['dossier'] && htmlspecialchars($sousdossier,ENT_QUOTES)==$row['sousdossier'] && htmlspecialchars($tags,ENT_QUOTES)==$row['tags'])
 	{
-		die('Dernière modification le '.formatDateTime(strtotime($row['updated'])));
+		die('Modification le '.formatDateTime(strtotime($row['updated'])));
 	}
     
 	//$entry = str_replace("<br>", "&nbsp;", $entry); // Remplacer les lignes vides par &nbsp; pour que si on format en code le saut de ligne est gardé // Finalement je le fais en amont dans la fonction JS updatenote()
     
-    fwrite($handle, $entry);
+    fwrite($handle, $entry);  // Ecrit un fichier en mode binaire.
 	fclose($handle);
+    // file_put_contents($filename, $entry);   // Test pour remplacer fwrite    
 	
 	if ($dossier != $row['dossier'])
 	{
