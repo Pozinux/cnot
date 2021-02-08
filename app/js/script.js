@@ -27,7 +27,7 @@ function updateident(el)
 
 function updateiddoss(el)
 {
-    editingnote = el.id.substr(4); 
+    editingnote = el.id.substr(7); 
 }
 
 function updateidsousdoss(el)
@@ -42,10 +42,6 @@ window.onbeforeunload = function(){
 };
 
 function updatenote(){
-    
-    
-
-    
     var headi = document.getElementById("inp"+editingnote).value;
     var ent = $("#entry"+editingnote).html();  // On récupère le contenu de la note et le transforme en html (les images sont converties en base64) pour l'enregistrer dans un fichier (fwrite dans updatenote.php)
 
