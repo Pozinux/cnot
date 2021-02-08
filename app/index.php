@@ -445,13 +445,13 @@ session_start();
                         <div class="contain_doss_tags" >
 							
 							<div class="icon_doss">'.$row["id"].'&nbsp;&nbsp;&nbsp;<span class="fa fa-folder"></div>
-							<div class="name_doss"><span><input size="15px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateiddoss(this);" id="dossier'.$row['id'].'" type="text" placeholder="Dossier ?" value="'.$row['dossier'].'"></input></span></div>
+							<div class="name_doss"><span><input size="12px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateiddoss(this);" id="dossier'.$row['id'].'" type="text" placeholder="Dossier ?" value="'.$row['dossier'].'"></input></span></div>
                             							
                             <div class="icon_sousdoss"><span class="fa fa-folder-open"></div>
-							<div class="name_sousdoss"><span><input size="15px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateidsousdoss(this);" id="sousdoss'.$row['id'].'" type="text" placeholder="Sous-dossier ?" value="'.$row['sousdossier'].'"></input></span></div>
+							<div class="name_sousdoss"><span><input size="20px" autocomplete="off" autocapitalize="off" spellcheck="false" onfocus="updateidsousdoss(this);" id="sousdoss'.$row['id'].'" type="text" placeholder="Sous-dossier ?" value="'.$row['sousdossier'].'"></input></span></div>
 							
 							<div class="icon_tag"><span style="text-align:center; font-size:12px;" class="fa fa-tag"></div>
-							<div class="name_tags"><span><input size="40px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tags" onfocus="updateidtags(this);" id="tags'.$row['id'].'" type="text" placeholder="Tags ?" value="'.$row['tags'].'"></input></span></div>
+							<div class="name_tags"><span><input size="38px" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tags" onfocus="updateidtags(this);" id="tags'.$row['id'].'" type="text" placeholder="Tags ?" value="'.$row['tags'].'"></input></span></div>
                         </div>
                         
                         <hr>                        
