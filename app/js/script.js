@@ -238,7 +238,7 @@ function checkedit(){
 
 function deletePermanent(iid){
     var r = confirm("Êtes-vous sûr de vouloir supprimer définitivement la note \""+document.getElementById("inp"+iid).value+"\" ? Elle sera perdue à jamais !");
-    var dossier_name = document.getElementById("dossier"+iid).value;	
+    var dossier_name = document.getElementById("doss"+iid).value;	
     if (r == true) {
         $.post( "permanentDelete.php", {pass: app_pass, id:iid, dossier: dossier_name})
         .done(function(data) {
