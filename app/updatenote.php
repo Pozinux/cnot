@@ -3,10 +3,14 @@
 	include 'functions.php';
 	include 'credentials.php';
 	$pass=$_POST['pass'];
+
+        //echo '<script> alert("'.$pass.'")</script>';
+
 	if($pass!=APPPASSWORD)
 	{
-		die('Password Incorrect');
+		die('Password Incorrect (updatenote.php)');
 	}
+        
 	include 'db_connect.php';
 	$id = $_POST['id'];
 	$heading = $_POST['heading'];
@@ -46,10 +50,13 @@
 	}
     
 	//$entry = str_replace("<br>", "&nbsp;", $entry); // Remplacer les lignes vides par &nbsp; pour que si on format en code le saut de ligne est gardé // Finalement je le fais en amont dans la fonction JS updatenote()
-    
-    //fwrite($handle, $entry);  // Ecrit un fichier en mode binaire.
-	//fclose($handle);
-    file_put_contents($filename, $entry);   // Test pour remplacer fwrite    
+  
+  
+       if (!fwrite($handle, $entry)){//;  // Ecrit un fichier en mode binaire.
+       die("Erreur lors de l écriture du fichier html");
+       }
+	fclose($handle);
+    //file_put_contents($filename, $entry);   // Test pour remplacer fwrite    
 	
     // Si le dossier a changé de nom, on supprime l'ancienne note qui se trouvait dans l'ancien dossier
 	if ($dossier != $row['dossier'])
@@ -61,5 +68,5 @@
     
 	// if($con->query($query)) echo die('Dernière modification le '.formatDateTime(strtotime(date("Y-m-d H:i:s", $seconds)))); // Pour avoir le "Dernière modification le"
 	if($con->query($query)) echo die(formatDateTime(strtotime(date("Y-m-d H:i:s", $seconds)))); // Si l'écriture de la requête en base est ok alors on sort
-	else echo mysqli_error($con); // Sinon on affiche l'erreur SQL
+	else echo 'Error mysql : '.mysqli_error($con); // Sinon on affiche l'erreur SQL
 ?>
