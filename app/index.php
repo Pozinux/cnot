@@ -217,7 +217,7 @@ session_start();
             // Afficher le dossier "Toutes les notes" pour pouvoir cliquer dessus revenir à la vue de tous les dossiers
             $key2 = "Toutes les notes";
             echo "<form action=index.php><input type=hidden name=note>                        
-                        <a class=links_arbo_gauche href='index.php' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='fas fa-folder'></div>".$key2."</a>
+                        <a class=links_arbo_gauche href='index.php' style='text-decoration:none; color:#333'><div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='fas fa-folder'></div>".$key2."</a>
                      </form>";
            
             echo "<div style='height: 2px'></div>"; // Ajuster la distance entre le dossier et son premier sous-dossier
@@ -227,7 +227,7 @@ session_start();
             {                    
                 // Afficher les dossiers
                 echo "<form action=index.php><input type=hidden name=note>                        
-                            <a class=links_arbo_gauche href='index.php?dossier=".$key."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='far fa-folder-open'></div>".$key."</a>
+                            <a class=links_arbo_gauche href='index.php?dossier=".$key."' style='text-decoration:none; color:#333'><div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='far fa-folder-open'></div>".$key."</a>
                          </form>";
                
                 echo "<div style='height: 2px'></div>"; // Ajuster la distance entre le dossier et sa première note
@@ -242,7 +242,7 @@ session_start();
                     if (isset($v2)){ // Si la note a un sous-dossier
                         // opacity:0; pour icon_sousdossier pour que l'icone n'apparaisse pas mais garde l'espace (pour qu'il y ait un décalage / comme dans Evernote)
                         echo "<form action=index.php><input type=hidden name=note>                        
-                                <a class=links_arbo_gauche href='index.php?dossier=".$key."&sousdossier=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_sousdossier; style='opacity:0; padding-right: 7px; padding-left: 10px; font-size:11px;' class='far fa-folder'></div>".$v2."</a>
+                                <a class=links_arbo_gauche href='index.php?dossier=".$key."&sousdossier=".urlencode($v2)."' style='text-decoration:none; color:#333'><div id=icon_sousdossier; style='opacity:0; padding-right: 7px; padding-left: 10px; font-size:11px;' class='far fa-folder'></div>".$v2."</a>
                              </form>";
 
                         echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les sous-dossiers
@@ -256,7 +256,7 @@ session_start();
                 // foreach ($value as $v2) 
                 // {           			
                     // echo "<form action=index.php><input type=hidden name=note>                        
-                            // <a class=links_arbo_gauche href='index.php?dossier=".$key."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 15px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
+                            // <a class=links_arbo_gauche href='index.php?dossier=".$key."&note=".urlencode($v2)."' style='text-decoration:none; color:#333'><div id=icon_notes; style='padding-right: 7px;padding-left: 15px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
                          // </form>";
 
                     // echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les notes
@@ -344,7 +344,7 @@ session_start();
             foreach ($value as $v2) 
             {           			
                 echo "<form action=index.php><input type=hidden name=note>                        
-                        <a class=links_arbo_gauche href='index.php?dossier=".$key."&sousdossier=".$sousdossier."&note=".urlencode($v2)."' style='text-decoration:none; color:#333' onclick='document.getElementById(clicnote).submit()'><div id=icon_notes; style='padding-right: 7px;padding-left: 8px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
+                        <a class=links_arbo_gauche href='index.php?dossier=".$key."&sousdossier=".$sousdossier."&note=".urlencode($v2)."' style='text-decoration:none; color:#333'><div id=icon_notes; style='padding-right: 7px;padding-left: 8px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
                      </form>";
 
                 echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les notes

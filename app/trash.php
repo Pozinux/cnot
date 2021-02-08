@@ -80,9 +80,4 @@ session_start();
 		}
 	?>
 </body>
-	
-	<script src="js/script.js"></script>
-	<script>
-	$(".noteentry").popline();
-	</script>
 </html>
