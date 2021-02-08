@@ -9,7 +9,7 @@ function updateidsearch(el)
 
 function updateidhead(el) 
 {
-    editingnote = el.id.substr(3);
+    editingnote = el.id.substr(3); // 3 pour inp
 }
 
 function updateidtags(el)
@@ -27,12 +27,12 @@ function updateident(el)
 
 function updateiddoss(el)
 {
-    editingnote = el.id.substr(7); 
+    editingnote = el.id.substr(7);   // 7 pour "dossier"
 }
 
 function updateidsousdoss(el)
 {
-    editingnote = el.id.substr(8); 
+    editingnote = el.id.substr(8);    // 8 pour "sousdoss"
 }
 
 window.onbeforeunload = function(){

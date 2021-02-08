@@ -439,9 +439,8 @@ session_start();
                     <div class="innernote">
                     
                         <span style="cursor:pointer" title="Supprimer cette note" onclick="deleteNote(\''.$row['id'].'\')" class="fas fa-trash pull-right icon_corbeille"></span>
-             
                     
-                        <div id="lastupdated'.$row['id'].'" class="lastupdated">Dernière modification le '.formatDateTime(strtotime($row['updated'])).'</div>
+                        <div id="lastupdated'.$row['id'].'" class="lastupdated">'.formatDateTime(strtotime($row['updated'])).'</div>
                         
                         <div class="contain_doss_tags" >
 							
