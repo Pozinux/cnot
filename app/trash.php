@@ -80,4 +80,5 @@ session_start();
 		}
 	?>
 </body>
+	<script src="js/script.js"></script>
 </html>
