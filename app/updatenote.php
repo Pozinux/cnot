@@ -35,13 +35,14 @@
 	{
 		die("Vous devez définir un dossier qui existe déjà.");
 	}
-	
+
     // Test pour remplacer fread
     //$str = file_get_contents($filename);   
+
+     // ATTENTION !!! $str est toujours vide donc cette partie ne marche jamais !!!!" 	
+      $str = fread($handle, filesize($filename)); // Lecture du fichier en mode binaire. On lit ce qui existe déjà dans le fichier html enregistré sur le disque.
     
-	$str = fread($handle, filesize($id.".html")); // Lecture du fichier en mode binaire. On lit ce qui existe déjà dans le fichier html enregistré sur le disque.
-    
-    // S'il n'y a eu aucun changement à la note, on sort du script
+        // S'il n'y a eu aucun changement à la note, on sort du script
 	if(htmlspecialchars($heading,ENT_QUOTES)==$row['heading'] && $entry==$str && htmlspecialchars($dossier,ENT_QUOTES)==$row['dossier'] && htmlspecialchars($sousdossier,ENT_QUOTES)==$row['sousdossier'] && htmlspecialchars($tags,ENT_QUOTES)==$row['tags'])
 	{
 		//die('Modification le '.formatDateTime(strtotime($row['updated'])));  // die = exit. Stop l'éxécution du script et affiche le message en paramètre.
@@ -50,11 +51,14 @@
 	}
     
 	//$entry = str_replace("<br>", "&nbsp;", $entry); // Remplacer les lignes vides par &nbsp; pour que si on format en code le saut de ligne est gardé // Finalement je le fais en amont dans la fonction JS updatenote()
+        
+       if ($entry != '') // Si la note est vide et que l'on a changé que le titre, alors ne pas essayer d'écrire une entry vide dans le fichier html
+ 	{
+       	    if (!fwrite($handle, $entry)){//;  // Ecrit un fichier en mode binaire.
+               die("Erreur lors de l écriture du fichier html");
+            }  
+	}  
   
-  
-       if (!fwrite($handle, $entry)){//;  // Ecrit un fichier en mode binaire.
-       die("Erreur lors de l écriture du fichier html");
-       }
 	fclose($handle);
     //file_put_contents($filename, $entry);   // Test pour remplacer fwrite    
 	
