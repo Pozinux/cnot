@@ -13,6 +13,8 @@ session_start();
     $dossier_search = $_POST['dossier_search'];
     $sousdossier_search = $_POST['sousdossier_search'];
     $note = $_GET['note'];
+	
+	$limite_affichage_droite = 25;
     
     // if (isset($dossier))
     // {
@@ -137,13 +139,13 @@ session_start();
                         $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
                         $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND (tags like \'%'.htmlspecialchars($tags_search,ENT_QUOTES).'%\') ORDER by updated DESC';
                     }
-                    else // sinon c'est un recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché // C'est aussi l'affichage de toutes les notes (recherche "")
+                    else // sinon c'est une recherche dans les notes donc on ne veut afficher que les notes qui contiennent le mot recherché // C'est aussi l'affichage de toutes les notes (recherche "")
                     {
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC';
                         //echo 'TPO :'.$dossier;
                         $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
                         //echo 'TPO :'.$query_milieu;
-                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC LIMIT 50';
+                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC LIMIT 25'; // Limite à afficher 25 notes à droite car sinon c'est trop long à charger qd bcp de notes dans la section toutes les notes
 
                     }
                 }
@@ -159,7 +161,7 @@ session_start();
                     {
                         $query_gauche = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 ORDER BY dossier ASC'; 
                         $query_milieu = 'SELECT dossier, sousdossier, heading FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC'; 
-                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC';
+                        $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND (heading like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\' OR entry like \'%'.htmlspecialchars($search,ENT_QUOTES).'%\') ORDER by updated DESC LIMIT '.$limite_affichage_droite.''; // Limite à afficher 25 notes à droite car sinon c'est trop long à charger qd bcp de notes dans un dossier
 
                     }
                 } 
@@ -324,9 +326,7 @@ session_start();
             
             // echo "<pre>";
             // var_dump($table);
-            // echo "</pre>";   
-            
-            
+            // echo "</pre>";   		 
 		}
        
 		foreach ($table as $key => $value)   // $value = note / $key = dossier / 
@@ -389,7 +389,7 @@ session_start();
             // echo "dossier_search : $dossier_search<br />";
             // echo "sousdossier_search : $sousdossier_search<br />";           
         
-            if($search!='') // on arrive ici suite à une recherche, ça va afficher les résultat de la recherche + le petit icone en croix pour sortir de la recherche
+            if($search!='') // on arrive ici suite à une recherche, ça va afficher les résultats de la recherche + le petit icone en croix pour sortir de la recherche
             { 
                 if($dossier == '')  // Si on est sur le dossier toutes les notes
                 {
@@ -405,7 +405,7 @@ session_start();
                     echo '<br><div style="text-align:center; font-weight:300;"> Résultats pour la recherche de <b>'.$search.'</b> dans le titre et le contenu des notes du dossier <b>'.$dossier_search.'</b> <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span style="color:red" class="fa fa-times"></span></span></div><br>';
                 }   
             }
-            if($tags_search!='') // on arrive ici suite à une recherche tag, ça va afficher les résultat de la recherche + le petit icone en croix pour sortir de la recherche
+            else if($tags_search!='') // on arrive ici suite à une recherche tag, ça va afficher les résultat de la recherche + le petit icone en croix pour sortir de la recherche
             {
                 if($dossier == '')  // Si on est sur le dossier toutes les notes
                 {
@@ -421,6 +421,11 @@ session_start();
                     echo '<br><div style="text-align:center; font-weight:300;"> Résultats pour la recherche de <b>'.$tags_search.'</b> dans les tags des notes du dossier <b>'.$dossier_search.'</b> <span style="cursor:pointer;font-weight:700;" onclick="window.location=\'index.php\'"><span style="color:red" class="fa fa-times"></span></span></div><br>';
                 }   
             }
+			else // Sinon c'est que ce n'est pas une recherche donc on affiche juste une info comme quoi on a affiché les X premières notes à droite
+			{
+				#echo '<br><div style="text-align:center; font-weight:300;">Les '.$limite_affichage_droite.' premières notes sont affichées ci-dessous</span></span></div><br>';
+				echo '<br><div style="text-align:center; font-weight:300;">Affichage des <b>'.$limite_affichage_droite.'</b> premières notes du dossier <b>'.$dossier.' / '.$sousdossier.'</b> ci-dessous</span></div><br>';
+			}
 			
 			// Liste de droite en fonction de la requête créée plus haut //		
 		
@@ -469,7 +474,7 @@ session_start();
     </div>
 </body>
 	
-
+<!-- Ne pas mettre ce bloc en haut sinon le popline ne marchera plus --> 
 <script src="js/script.js"></script>
 <script> $(".noteentry").popline(); </script>  <!-- Lorsque l'on sélectionne un texte, cela fait apparaitre le menu d'édition en floatant dans la zone .noteentry (donc contenu des notes) au-dessus / Il faut que ce soit un 'contenteditable="true"' -->
 
