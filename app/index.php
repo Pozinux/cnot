@@ -303,56 +303,54 @@ session_start();
  		
 		$table = array(); // On créé un tableau vide dans lequel on va mettre les notes des dossiers
 
-		while($row1 = mysqli_fetch_array($res_milieu, MYSQLI_ASSOC)) 
-		{
-            // echo "<pre>";
-            // var_dump($row1);
-            // echo "</pre>";
-            
-            // if (isset($row1["sousdossier"]))
-            // {
-                // if (!isset($table[$row1["sousdossier"]])){ // Si le sous-dossier n'existe pas dans le nouveau tableau...
-                    // $table[$row1["sousdossier"]] = array(); // ...on insert au nouveau tableau global un nouveau tableau vide au nom de ce sous-dossier
-                // }
-                // $table[$row1["sousdossier"]][] = $row1["heading"]; // Append / on ajoute au tableau global/tableau du dossier le titre de la note
-            // }
-            // else
-            // { 
+        if( $dossier == NULL ) // Si on a cliqué sur "Toutes les notes", on veut afficher au milieu les notes par last update et non par last update dans un carnet
+        {
+            while($row1 = mysqli_fetch_array($res_milieu, MYSQLI_ASSOC)) 
+            {       
+
+                // echo "<pre>";
+                // var_dump($row1);
+                // echo "</pre>"; 
+
+                /*echo "<form action=index.php><input type=hidden name=note>                        
+                        <a class=links_arbo_gauche href='index.php?dossier=".$row1["dossier"]."&sousdossier=".$row1["sousdossier"]."&note=".urlencode($row1["heading"])."' style='text-decoration:none; color:#333'><div id=icon_notes; style='padding-right: 7px;padding-left: 8px; font-size:11px;' class='far fa-file'></div>".$row1["heading"]." (".$row1["dossier"]."/".$row1["sousdossier"].")</a>
+                    </form>";*/
+
+                echo "<form action=index.php><input type=hidden name=note>                        
+                    <a class=links_arbo_gauche href='index.php?dossier=".$row1["dossier"]."&sousdossier=".$row1["sousdossier"]."&note=".urlencode($row1["heading"])."' style='text-decoration:none; color:#333'><div id=icon_notes; style='padding-right: 7px;padding-left: 8px; font-size:11px;' class='far fa-file'></div>".$row1["heading"]."</a>
+                </form>";
+
+                echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les notes		 
+            }
+        }
+        else
+        {
+            while($row1 = mysqli_fetch_array($res_milieu, MYSQLI_ASSOC)) 
+            {       
+        
                 if (!isset($table[$row1["dossier"]])){ // Si le dossier n'existe pas dans le nouveau tableau...
                     $table[$row1["dossier"]] = array(); // ...on insert au nouveau tableau global un nouveau tableau vide au nom de ce dossier
                 }
                 $table[$row1["dossier"]][] = $row1["heading"]; // Append / on ajoute au tableau global/tableau du dossier le titre de la note           
-            //}
-            
-            // echo "<pre>";
-            // var_dump($table);
-            // echo "</pre>";   		 
-		}
-       
-		foreach ($table as $key => $value)   // $value = note / $key = dossier / 
-		{      
-            // Afficher les dossiers (je ne l'affiche pas car c'est le dossier parent dont pour les sous-dossier ça embrouille. Au dessus j'affiche le vrai dossier donc c'est bon)
-            
-            // echo "<form action=index.php><input type=hidden name=note>                        
-                        // <div id=icon_notes; style='padding-right: 7px; font-size:13px;' class='far fa-folder'></div>".$key."</a>
-                     // </form>";
-           
-			// echo "<div style='height: 2px'></div>"; // Ajuster la distance entre le dossier et sa première note
-            
-            // Afficher les sous-dossiers des dossiers
-            
-            foreach ($value as $v2) 
-            {           			
-                echo "<form action=index.php><input type=hidden name=note>                        
-                        <a class=links_arbo_gauche href='index.php?dossier=".$key."&sousdossier=".$sousdossier."&note=".urlencode($v2)."' style='text-decoration:none; color:#333'><div id=icon_notes; style='padding-right: 7px;padding-left: 8px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
-                     </form>";
-
-                echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les notes
+        
+                // echo "<pre>";
+                // var_dump($table);
+                // echo "</pre>";   		 
             }
-            echo "<div style='height: 10px'></div>"; // Pour ajuster la distance entre les notes     
-            
-		}
- 
+       
+            foreach ($table as $key => $value)   // $value = note / $key = dossier / 
+            {                  
+                foreach ($value as $v2) 
+                {           			
+                    echo "<form action=index.php><input type=hidden name=note>                        
+                            <a class=links_arbo_gauche href='index.php?dossier=".$key."&sousdossier=".$sousdossier."&note=".urlencode($v2)."' style='text-decoration:none; color:#333'><div id=icon_notes; style='padding-right: 7px;padding-left: 8px; font-size:11px;' class='far fa-file'></div>".$v2."</a>
+                        </form>";
+
+                    echo "<div id=pxbetweennotes; style='height: 0px'></div>";  // Pour ajuster la distance entre les notes
+                }
+                echo "<div style='height: 10px'></div>"; // Pour ajuster la distance entre les notes     
+            }
+        }		 
     ?>
     </div>
 	
