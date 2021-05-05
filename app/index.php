@@ -292,8 +292,7 @@ session_start();
             $query_droite = 'SELECT * FROM entries WHERE trash = 0 AND dossier = \''.htmlspecialchars($dossier,ENT_QUOTES).'\' AND (heading = \''.htmlspecialchars($note,ENT_QUOTES).'\')';     
         }
         
-      
-        // Arborescence COL MILIEU //            
+        // Arborescence COL MILIEU //             
         
         // Afficher le dossier ou sous dossier en gras en haut de la liste
                 
