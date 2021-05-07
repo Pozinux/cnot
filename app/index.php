@@ -7,12 +7,12 @@ session_start();
 	include 'credentials.php';
 	$pass=$_SESSION['pass'];
 	$search = $_POST['search'];
-    $tags_search = $_POST['tags_search'];
-    $dossier = $_GET['dossier'];
-    $sousdossier = $_GET['sousdossier'];
-    $dossier_search = $_POST['dossier_search'];
-    $sousdossier_search = $_POST['sousdossier_search'];
-    $note = $_GET['note'];
+        $tags_search = $_POST['tags_search'];
+        $dossier = $_GET['dossier'];
+        $sousdossier = $_GET['sousdossier'];
+        $dossier_search = $_POST['dossier_search'];
+        $sousdossier_search = $_POST['sousdossier_search'];
+        $note = $_GET['note'];
 	
 	$limite_affichage_droite = 25;
     
