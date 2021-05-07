@@ -3,8 +3,8 @@
 session_start();
 ?>
 <?php
-	include 'functions.php';
-	include 'credentials.php';
+    include 'functions.php';
+    include 'credentials.php';
     $pass=$_SESSION['pass'];
     $search = $_POST['search'];
     $tags_search = $_POST['tags_search'];
