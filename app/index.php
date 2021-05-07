@@ -13,7 +13,6 @@ session_start();
     $dossier_search = $_POST['dossier_search'];
     $sousdossier_search = $_POST['sousdossier_search'];
     $note = $_GET['note'];
-	
     $limite_affichage_droite = 25;
     
     // if (isset($dossier))
