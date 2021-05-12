@@ -3,12 +3,6 @@ body {
 	font-size: 13px;
 }
 
-/* Pour le popline code format */
-@font-face {
-  font-family: 'menlo';
-  src: url('../fonts/menlo.woff') format('woff');
-}
-
 #col_1{
     height:100%;
     position:absolute;

@@ -15,7 +15,8 @@
     return {
         quote: function() {          
           document.execCommand('formatblock', false, 'BLOCKQUOTE');
-          document.execCommand('fontName', false, "menlo"); // Le fichier se trouve dans le dossier fonts + ajout d'un css @font-face dans style.css
+          //document.execCommand('fontName', false, "menlo"); // Le fichier se trouve dans le dossier fonts + ajout d'un css @font-face dans style.css
+          document.execCommand('fontName', false, "Consolas");
         },
         unquote: function() {
             document.execCommand('formatblock', false, 'P');
